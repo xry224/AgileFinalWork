@@ -9,7 +9,8 @@
                  android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
         <activity
                 android:name="View.MainActivity"
-                android:label="maintest" >
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                android:label="出游" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

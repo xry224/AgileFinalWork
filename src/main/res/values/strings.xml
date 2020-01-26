@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">agile</string>
+    <string name="defaultLocation">北京</string>
 </resources>

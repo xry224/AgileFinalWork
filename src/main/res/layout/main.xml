@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <Button
-            android:id="@+id/button_showDefaultDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClickShowDefaultDialog"
-            android:text="显示默认对话框"/>
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="match_parent" android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent"
+                  android:id="@+id/topBar"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:background="@color/gold">
+        <TextView android:layout_height="35dp"
+                  android:id="@+id/mainLocation"
+                  android:layout_marginStart="10dp"
+                  android:layout_marginTop="2dp"
+                  android:text="@string/defaultLocation"
+                  android:textColor="@color/black"
+                  android:textStyle="bold"
+                  android:clickable="true"
+                  android:onClick="clickLocation"
+                  android:textSize="25sp"
+                  android:layout_width="wrap_content"/>
+        <EditText android:layout_width="200dp"
+                  android:hint="搜索"
+                  android:layout_marginTop="2dp"
+                  android:background="@color/white"
+                  android:textColor="@color/black"
+                  android:layout_marginStart="20dp"
+                  android:id="@+id/mainSearch"
+                  android:textSize="25sp"
+                  android:layout_height="35dp"/>
+        <ImageButton android:layout_width="30dp"
+                     android:layout_marginTop="5dp"
+                     android:layout_marginStart="5dp"
+                     android:id="@+id/searchButton"
+                     android:scaleType="fitCenter"
+                     android:src="@drawable/search"
+                     android:layout_height="30dp" style="@style/ImageButton.Compat"/>
+        <ImageButton android:layout_width="30dp"
+                     android:layout_marginTop="5dp"
+                     android:layout_marginStart="10dp"
+                     android:id="@+id/messageButton"
+                     android:scaleType="fitCenter"
+                     android:src="@drawable/message"
+                     android:layout_height="30dp" style="@style/ImageButton.Compat"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:id="@+id/findLinear"
+                  android:background="@color/gold"
+                  android:gravity="center"
+                  android:layout_height="200dp">
+        <FrameLayout android:id="@+id/gridFrame"
+                     android:background="@color/white"
+                     android:layout_gravity="center"
+                     android:layout_width="350dp"
+                     android:layout_height="180dp">
+            <Button android:id="@+id/footballButton"
+                    android:layout_width="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/black"
+                    android:text="足球"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/football32"
+                    android:layout_height="50dp"/>
+        </FrameLayout>
+    </LinearLayout>
 
-    <Button
-            android:id="@+id/button_showQMUIDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClickShowQMUIDialog"
-            android:text="显示QMUI"/>
 </LinearLayout>
