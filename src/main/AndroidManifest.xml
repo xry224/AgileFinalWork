@@ -8,7 +8,7 @@
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".MainActivity"
+                android:name="View.MainActivity"
                 android:label="maintest" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

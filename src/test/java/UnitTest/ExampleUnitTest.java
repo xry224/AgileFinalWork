@@ -1,4 +1,4 @@
-package com.example.agile;
+package UnitTest;
 
 import org.junit.Test;
 

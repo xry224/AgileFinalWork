@@ -1,4 +1,4 @@
-package com.example.agile;
+package Test;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
