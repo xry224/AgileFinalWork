@@ -1,19 +1,33 @@
 package entity;
 
 import java.util.ArrayList;
-
+/*
+用户实体
+ */
 public class User {
+    //用户名
     private String userName;
+    //用户ID，唯一标志
     private String userID;
+    //真实姓名
     private String realName;
+    //信用评级
     private int rankScore;
+    //是否实名认证
     private boolean hasAuthentication;
+    //参加活动的列表
     private ArrayList<Event> eventList;
+    //评论列表
     private ArrayList<Comment> comments;
     //历史活动记录暂不考虑
     private ArrayList<Event> historyEvent;
+    //需要通知的活动
     private ArrayList<Event> needNotification;
-    public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication) {
+    //用户信息
+    private String email;
+    private String phoneNumber;
+
+    public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication, String email, String phoneNumber) {
         eventList = new ArrayList<>();
         historyEvent = new ArrayList<>();
         needNotification = new ArrayList<>();
@@ -23,10 +37,12 @@ public class User {
         this.realName = realName;
         this.rankScore = rankScore;
         this.hasAuthentication = hasAuthentication;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication, ArrayList<Event> eventList,
-                ArrayList<Event> historyEvent, ArrayList<Event> needNotification, ArrayList<Comment> comments) {
+                ArrayList<Event> historyEvent, ArrayList<Event> needNotification, ArrayList<Comment> comments, String email, String phoneNumber) {
 
         this.userName = userName;
         this.userID = userID;
@@ -37,6 +53,24 @@ public class User {
         this.historyEvent = historyEvent;
         this.comments = comments;
         this.needNotification = needNotification;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void addComment (Comment comment) {

@@ -4,16 +4,26 @@ import android.media.Image;
 import android.provider.ContactsContract;
 
 import java.util.ArrayList;
-
+/*
+商家
+ */
 public class Merchant {
+    //商家名称
     private String shopName;
     //类型可能需要更改，同Event中的image
     private Image titleImage;
+    //店内预览图
     private ArrayList<Image> imageList;
+    //上架位置
     private String position;
+    //主营业务
     private ArrayList<String> mainBusiness;
+    //介绍
     private String description;
+    //商店评论
     private ArrayList<Comment> commentList;
+    //商店评分,-1代表新店
+    private int rank;
 
     public Merchant(String shopName, Image titleImage, String position, String description) {
         commentList = new ArrayList<>();
@@ -23,9 +33,10 @@ public class Merchant {
         this.titleImage = titleImage;
         this.position = position;
         this.description = description;
+        rank = -1;
     }
 
-    public Merchant(String shopName, Image titleImage, ArrayList<Image> imageList, String position,
+    public Merchant(String shopName, Image titleImage, ArrayList<Image> imageList, String position, int rank,
                     ArrayList<String> mainBusiness, String description, ArrayList<Comment> commentList) {
         this.shopName = shopName;
         this.titleImage = titleImage;
@@ -34,6 +45,15 @@ public class Merchant {
         this.mainBusiness = mainBusiness;
         this.description = description;
         this.commentList = commentList;
+        this.rank = rank;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     //此方法参数视情况修改

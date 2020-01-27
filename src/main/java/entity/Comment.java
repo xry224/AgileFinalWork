@@ -1,14 +1,21 @@
 package entity;
 
 import java.util.ArrayList;
-
+/*
+    对商店的评论类
+ */
 public class Comment {
+    //评论者
     private User critic;
+    //评论内容
     private String content;
+    //评分
     private int rank;
     //暂不考虑对评论的回复
     private ArrayList<String> replay;
+    //点赞数
     private int positive;
+    //点踩数
     private int negative;
 
     public Comment(String content, int rank, int positive, int negative, User user) {

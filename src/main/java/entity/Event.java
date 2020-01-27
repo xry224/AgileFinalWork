@@ -4,16 +4,27 @@ import android.media.AudioRecord;
 import android.media.Image;
 import java.util.ArrayList;
 import java.util.Date;
-
+/*
+    活动实体
+ */
 public class Event {
+    //活动名称
     private String eventName;
+    //活动地点
     private String position;
+    //活动日期，精确到分钟
     private Date time;
+    //活动描述
     private String description;
+    //活动发起人
     private User founder;
+    //活动参与者
     private ArrayList<User> member;
+    //活动标志ID，该变量唯一
     private String eventID;
+    //活动标签
     private ArrayList<String> label;
+    //活动的预览图片
     //将其显示在UI前需要将其转换为其他类型
     //此类型可能需要根据数据库实际存储情况做改变
     private Image picture;
