@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">agile</string>
     <string name="defaultLocation">北京</string>
+    <string name="searchDes">搜索按钮</string>
+    <string name="messageDes">消息按钮</string>
+    <string name="searchButtonStr">搜索</string>
+    <string name="autofillHints">输入活动名称或标签内容</string>
+
+    <!-- string for button -->
+    <string name = "Button11">足球</string>
+    <string name = "Button12">篮球</string>
+    <string name = "Button13">国际象棋</string>
+    <string name = "Button14">健身</string>
+    <string name = "Button15">扑克</string>
+    <string name = "Button16">跑步</string>
+    <string name = "Button21">三国杀</string>
+    <string name = "Button22">游泳</string>
+    <string name = "Button23">气排球</string>
+    <string name = "Button24">乒乓球</string>
+    <string name = "Button25">网球</string>
+    <string name = "Button26">更多</string>
 </resources>
