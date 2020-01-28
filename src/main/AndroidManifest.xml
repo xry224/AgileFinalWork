@@ -7,14 +7,14 @@
                  android:roundIcon="@mipmap/ic_launcher_round"
                  android:supportsRtl="true"
                  android:theme="@style/Theme.AppCompat.Light.NoActionBar" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="View.findNearby">
+        <activity android:name="view.findNearby">
         </activity>
-        <activity android:name="View.historyList">
+        <activity android:name="view.historyList">
         </activity>
-        <activity android:name="View.myAccount">
+        <activity android:name="view.myAccount">
         </activity>
         <activity
-                android:name="View.MainActivity"
+                android:name="view.MainActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:label="出游" >
             <intent-filter>

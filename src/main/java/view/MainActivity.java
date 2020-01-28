@@ -1,12 +1,18 @@
-package View;
+package view;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.agile.R;
 import entity.*;
@@ -16,33 +22,80 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private ArrayList<Event> totalEventList = new ArrayList<>();
     private ArrayList<User> totalUserList = new ArrayList<>();
     private ArrayList<Merchant> totalMerchantList = new ArrayList<>();
+    private boolean firstIn = true;
+    private View mainView = null;
+    private View historyView = null;
+    private View accountView = null;
+    private View findView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        initTestData();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        LayoutInflater flater = getLayoutInflater();
+        initView(flater);
+        setContentView(mainView);
+        if (firstIn)
+        {
+            initTestData();
+            init();
+            firstIn = false;
+        }
         showEventCard(totalEventList, 5);
-        //Button bind
-        ImageButton searchButton = findViewById(R.id.searchButton);
-        ImageButton messageButton = findViewById(R.id.messageButton);
-        searchButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+    }
+    private void initView(LayoutInflater flater) {
+        mainView = flater.inflate(R.layout.main, null);
+        historyView = flater.inflate(R.layout.history, null);
+        accountView = flater.inflate(R.layout.account_page, null);
+        findView = flater.inflate(R.layout.find_near, null);
+    }
 
-            }
-        });
-        messageButton.setOnClickListener(new View.OnClickListener(){
+    private void init() {
+        //底部导航栏
+        RadioGroup navigate = findViewById(R.id.navigateGroup);
+        navigate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                //直接使用setContentView(int viewID)会使所有view失效
+                switch (checkedId){
+                    case R.id.homePageButton:
+                    {
+                        setContentView(mainView);
+                        showEventCard(totalEventList, 5);
+                        break;
+                    }
+                    case R.id.eventListButton:
+                    {
+                        System.out.println("viewChanged!");
+                        setContentView(historyView);
+                        init();
+                        break;
+                    }
+                    case R.id.newEventButton:
+                    {
+                        builder.setMessage("not yet");
+                        builder.create().show();
+                        break;
+                    }
+                    case R.id.findNearByButton:
+                    {
+                        setContentView(findView);
+                        init();
+                        break;
+                    }
+                    case R.id.myAccountButton:
+                    {
+                        setContentView(accountView);
+                        init();
+                        break;
+                    }
+                }
             }
         });
     }
-
     public void clickLocation(View v) {
 
     }
@@ -126,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
     //显示活动卡片
     public void showEventCard(ArrayList<Event> events, int targetSize) {
         LinearLayout layoutRoot = findViewById(R.id.showEvent);
+        layoutRoot.removeAllViews();
         int length = Math.min(events.size(), targetSize);
         //至多只显示targetSize个活动
         for (int i = 0; i < length; ++i)

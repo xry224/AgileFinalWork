@@ -1,12 +1,11 @@
-package View;
+package view;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.agile.R;
 
-public class findNearby extends AppCompatActivity {
+public class findNearby extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

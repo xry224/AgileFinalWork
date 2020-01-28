@@ -1,14 +1,14 @@
-package View;
+package view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.agile.R;
 
-public class myAccount extends AppCompatActivity {
+public class historyList extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_page);
-
+        setContentView(R.layout.history);
     }
 }
