@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         //至多只显示targetSize个活动
         for (int i = 0; i < length; ++i)
         {
-            int marginTop = 15 * (i + 1);
+            int marginTop = 15;
             //设置framelayout的布局
             FrameLayout frameLayout = new FrameLayout(layoutRoot.getContext());
             frameLayout.setBackgroundColor(Color.rgb(232,232,232));
@@ -146,10 +146,10 @@ public class MainActivity extends AppCompatActivity {
     private void initTestData() {
         //测试用用户数据
         User u1, u2, u3, u4;
-        u1 = new User("彼得大弟", "MF1932209", "徐世诚", 100, true);
-        u2 = new User("test", "MF1932208", "徐戎越", 100, true);
-        u3 = new User("臭弟弟", "MF1932212", "许昌舜", 100, true);
-        u4 = new User("牛逼", "MF1932118", "刘少国", 100, true);
+        u1 = new User("彼得大弟", "MF1932209", "徐世诚", 100, true, "smail1@nju.edu.cn", "1234561");
+        u2 = new User("test", "MF1932208", "徐戎越", 100, true, "smail2@nju.edu.cn", "1234562");
+        u3 = new User("臭弟弟", "MF1932212", "许昌舜", 100, true, "smail3@nju.edu.cn", "1234563");
+        u4 = new User("牛逼", "MF1932118", "刘少国", 100, true,"smail4@nju.edu.cn", "1234564");
         totalUserList.add(u1);
         totalUserList.add(u2);
         totalUserList.add(u3);
