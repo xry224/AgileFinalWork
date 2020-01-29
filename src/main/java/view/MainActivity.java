@@ -43,9 +43,9 @@ public class MainActivity extends Activity {
         if (firstIn)
         {
             initTestData();
-            init();
             firstIn = false;
         }
+        init();
         showEventCard(totalEventList, 5);
     }
     private void initView(LayoutInflater flater) {
@@ -54,34 +54,6 @@ public class MainActivity extends Activity {
         accountView = flater.inflate(R.layout.account_page, null);
         findView = flater.inflate(R.layout.find_near, null);
     }
-    //将上次被选中图标切换至未选中状态
-    private void backIcon() {
-        RadioButton radioButton = findViewById(lastSelectedBottomNavigator);
-        switch (lastSelectedBottomNavigator)
-        {
-            case R.id.homePageButton:
-            {
-                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.home16), null, null);
-                break;
-            }
-            case R.id.eventListButton:
-            {
-                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.history16), null, null);
-                break;
-            }
-            case R.id.findNearByButton:
-            {
-                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.find16), null, null);
-                break;
-            }
-            case R.id.myAccountButton:
-            {
-                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.account16), null, null);
-                break;
-            }
-        }
-    }
-
     private void init() {
         //底部导航栏
         RadioGroup navigate = findViewById(R.id.navigateGroup);
@@ -89,24 +61,13 @@ public class MainActivity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                RadioButton checked = findViewById(checkedId);
-                backIcon();
+                Intent intent = null;
                 //直接使用setContentView(int viewID)会使所有view失效
                 switch (checkedId){
-                    case R.id.homePageButton:
-                    {
-                        setContentView(mainView);
-                        showEventCard(totalEventList, 5);
-                        lastSelectedBottomNavigator = R.id.homePageButton;
-                        checked.setCompoundDrawables(null, getDrawable(R.drawable.home16select), null, null);
-                        break;
-                    }
                     case R.id.eventListButton:
                     {
-                        setContentView(historyView);
-                        init();
-                        lastSelectedBottomNavigator = R.id.eventListButton;
-                        checked.setCompoundDrawables(null, getDrawable(R.drawable.history16select), null, null);
+                        intent = new Intent(MainActivity.this, historyList.class);
+                        startActivity(intent);
                         break;
                     }
                     case R.id.newEventButton:
@@ -117,21 +78,22 @@ public class MainActivity extends Activity {
                     }
                     case R.id.findNearByButton:
                     {
-                        setContentView(findView);
-                        init();
-                        lastSelectedBottomNavigator = R.id.findNearByButton;
-                        checked.setCompoundDrawables(null, getDrawable(R.drawable.find16select), null, null);
+                        intent = new Intent(MainActivity.this, findNearby.class);
+                        startActivity(intent);
                         break;
                     }
                     case R.id.myAccountButton:
                     {
-                        setContentView(accountView);
-                        init();
-                        lastSelectedBottomNavigator = R.id.myAccountButton;
-                        checked.setCompoundDrawables(null, getDrawable(R.drawable.account16select), null, null);
+                        intent = new Intent(MainActivity.this, myAccount.class);
+                        startActivity(intent);
                         break;
                     }
-                }
+                    default:
+                    {
+                        break;
+                    }
+                } //end of switch
+                //startActivity(intent);
             }
         });
     }

@@ -23,7 +23,7 @@
                              android:text="@string/navigate1"
                              style="@style/TabRadioButton"
                              android:id="@+id/homePageButton"
-                             android:checked="true"
+                             android:checked="false"
                              android:drawableTop="@drawable/home16"
                              android:layout_height="wrap_content"/>
                 <RadioButton android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
                              android:text="@string/navigate4"
                              style="@style/TabRadioButton"
                              android:id="@+id/findNearByButton"
-                             android:checked="false"
-                             android:drawableTop="@drawable/find16"
+                             android:checked="true"
+                             android:drawableTop="@drawable/find16select"
                              android:layout_height="wrap_content"/>
                 <RadioButton android:layout_width="wrap_content"
                              android:text="@string/navigate5"

@@ -23,7 +23,7 @@
                              android:text="@string/navigate1"
                              style="@style/TabRadioButton"
                              android:id="@+id/homePageButton"
-                             android:checked="true"
+                             android:checked="false"
                              android:drawableTop="@drawable/home16"
                              android:layout_height="wrap_content"/>
                 <RadioButton android:layout_width="wrap_content"
@@ -51,8 +51,8 @@
                              android:text="@string/navigate5"
                              style="@style/TabRadioButton"
                              android:id="@+id/myAccountButton"
-                             android:checked="false"
-                             android:drawableTop="@drawable/account16"
+                             android:checked="true"
+                             android:drawableTop="@drawable/account16select"
                              android:layout_height="wrap_content"/>
 
             </RadioGroup>
