@@ -56,6 +56,25 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+    private User()
+    {
+        eventList = new ArrayList<>();
+        historyEvent = new ArrayList<>();
+        needNotification = new ArrayList<>();
+        comments = new ArrayList<>();
+        this.userName = "testName";
+        this.userID = "testID";
+        this.realName = "realName";
+        this.rankScore = 100;
+        this.hasAuthentication = true;
+        this.email = "test@teat.com";
+        this.phoneNumber = "123456";
+    }
+    //该方法可能被移植到DataBase相关类中
+    public static User getUser(String userName, String passwd) {
+        //some action in database
+        return new User();
+    }
 
     public String getEmail() {
         return email;

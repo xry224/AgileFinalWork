@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,7 +31,9 @@ public class MainActivity extends Activity {
     private View mainView = null;
     private View historyView = null;
     private View accountView = null;
+    private User currentLogin = null;
     private View findView = null;
+    private int lastSelectedBottomNavigator = R.id.homePageButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,33 @@ public class MainActivity extends Activity {
         accountView = flater.inflate(R.layout.account_page, null);
         findView = flater.inflate(R.layout.find_near, null);
     }
+    //将上次被选中图标切换至未选中状态
+    private void backIcon() {
+        RadioButton radioButton = findViewById(lastSelectedBottomNavigator);
+        switch (lastSelectedBottomNavigator)
+        {
+            case R.id.homePageButton:
+            {
+                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.home16), null, null);
+                break;
+            }
+            case R.id.eventListButton:
+            {
+                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.history16), null, null);
+                break;
+            }
+            case R.id.findNearByButton:
+            {
+                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.find16), null, null);
+                break;
+            }
+            case R.id.myAccountButton:
+            {
+                radioButton.setCompoundDrawables(null, getDrawable(R.drawable.account16), null, null);
+                break;
+            }
+        }
+    }
 
     private void init() {
         //底部导航栏
@@ -59,19 +89,24 @@ public class MainActivity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                RadioButton checked = findViewById(checkedId);
+                backIcon();
                 //直接使用setContentView(int viewID)会使所有view失效
                 switch (checkedId){
                     case R.id.homePageButton:
                     {
                         setContentView(mainView);
                         showEventCard(totalEventList, 5);
+                        lastSelectedBottomNavigator = R.id.homePageButton;
+                        checked.setCompoundDrawables(null, getDrawable(R.drawable.home16select), null, null);
                         break;
                     }
                     case R.id.eventListButton:
                     {
-                        System.out.println("viewChanged!");
                         setContentView(historyView);
                         init();
+                        lastSelectedBottomNavigator = R.id.eventListButton;
+                        checked.setCompoundDrawables(null, getDrawable(R.drawable.history16select), null, null);
                         break;
                     }
                     case R.id.newEventButton:
@@ -84,18 +119,23 @@ public class MainActivity extends Activity {
                     {
                         setContentView(findView);
                         init();
+                        lastSelectedBottomNavigator = R.id.findNearByButton;
+                        checked.setCompoundDrawables(null, getDrawable(R.drawable.find16select), null, null);
                         break;
                     }
                     case R.id.myAccountButton:
                     {
                         setContentView(accountView);
                         init();
+                        lastSelectedBottomNavigator = R.id.myAccountButton;
+                        checked.setCompoundDrawables(null, getDrawable(R.drawable.account16select), null, null);
                         break;
                     }
                 }
             }
         });
     }
+
     public void clickLocation(View v) {
 
     }
@@ -262,5 +302,12 @@ public class MainActivity extends Activity {
         totalEventList.add(event9);
         totalEventList.add(event10);
         totalEventList.add(event11);
+        for (User user : totalUserList)
+        {
+            for (Event event : totalEventList)
+            {
+                user.joinEvent(event);
+            }
+        }
     }
 }

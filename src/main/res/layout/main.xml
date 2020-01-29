@@ -212,7 +212,7 @@
                          style="@style/TabRadioButton"
                          android:id="@+id/homePageButton"
                          android:checked="true"
-                         android:drawableTop="@drawable/home16"
+                         android:drawableTop="@drawable/home16select"
                          android:layout_height="wrap_content"/>
             <RadioButton android:layout_width="wrap_content"
                          android:text="@string/navigate2"

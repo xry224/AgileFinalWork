@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <ImageView android:layout_width="wrap_content"
+               android:id="@+id/userIcon"
+               android:layout_gravity="center"
+               android:src="@drawable/account128"
+               android:layout_marginTop="50dp"
+               android:layout_height="wrap_content"/>
+    <EditText android:layout_width="320dp"
+              android:layout_gravity="center"
+              android:id="@+id/userName"
+              android:layout_marginTop="20dp"
+              android:inputType="text"
+              android:hint="@string/loginNameHint"
+              android:layout_height="50dp"/>
+    <EditText android:layout_width="320dp"
+              android:id="@+id/password"
+              android:inputType="textPassword"
+              android:hint="@string/loginPwHint"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center"
+              android:layout_height="50dp"/>
+    <Button android:layout_width="wrap_content"
+            android:id="@+id/loginButton"
+            android:text="@string/loginCHN"
+            android:layout_marginTop="20dp"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:background="@drawable/loginbuttontype"
+            android:layout_height="wrap_content"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="20dp"
+                  android:layout_height="wrap_content">
+        <Button android:layout_width="wrap_content"
+                android:id="@+id/newUser"
+                android:layout_marginStart="5dp"
+                android:background="@color/qmui_config_color_transparent"
+                android:text="@string/newUser"
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle"/>
+        <Button android:layout_width="wrap_content"
+                android:layout_marginStart="175dp"
+                android:id="@+id/forgetpw"
+                tools:ignore="ButtonStyle"
+                android:background="@color/qmui_config_color_transparent"
+                android:text="@string/forgetpw"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
