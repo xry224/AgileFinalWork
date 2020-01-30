@@ -3,13 +3,73 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView android:layout_width="wrap_content"
-              android:text="this is a account page"
+    <!-- 用户信息，包括实名，用户名以及头像 -->
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_marginTop="30dp"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <ImageButton android:layout_width="128sp"
+                     android:id="@+id/userImage"
+                     android:background="@color/qmui_config_color_transparent"
+                     android:src="@drawable/account128"
+                     android:layout_marginStart="30dp"
+                     android:layout_height="128sp"/>
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_marginStart="30dp"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="150dp"
+                      android:id="@+id/userNameText"
+                      android:textSize="30sp"
+                      android:textStyle="bold"
+                      android:text="username"
+                      android:layout_height="wrap_content"/>
+            <TextView android:layout_width="150dp"
+                      android:id="@+id/realName"
+                      android:textSize="25dp"
+                      android:layout_marginTop="40dp"
+                      android:text="实名: 张三"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 分割线 -->
+    <View   android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black" />
+    <!-- 信用积分 -->
+    <TextView android:layout_height="wrap_content"
+              android:text = "@string/score"
+              android:layout_gravity="center"
+              android:layout_marginTop="10dp"
+              android:textSize="20sp"
+              android:textStyle="bold"
+              android:layout_width="wrap_content"/>
+    <TextView android:layout_height="wrap_content"
+              android:text = "@string/goodCredit"
+              android:layout_gravity="center"
+              android:layout_marginTop="10dp"
+              android:textSize="20sp"
+              android:layout_width="wrap_content"/>
+    <View   android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black" />
+    <!-- 设置项列表 -->
+    <ListView android:layout_width="match_parent"
+              android:layout_gravity="center"
+              android:dividerHeight="2dp"
+              android:id="@+id/setList"
+              android:divider="@color/black"
               android:layout_height="wrap_content"/>
+    <View   android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/black" />
+    <!-- 底部导航栏 -->
     <RelativeLayout android:layout_width="match_parent"
                     android:id="@+id/accountRelative"
                     android:layout_height="wrap_content">
-        <!-- 底部导航栏 -->
         <FrameLayout android:layout_width="match_parent"
                      android:id="@+id/bottomNavigate"
                      android:layout_alignParentBottom="true"

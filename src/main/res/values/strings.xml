@@ -29,4 +29,6 @@
     <string name="newUser">快速注册</string>
     <string name="forgetpw">忘记密码</string>
     <string name="loginCHN">登录</string>
+    <string name="score">信用积分: 100</string>
+    <string name="goodCredit">信用良好，请继续保持</string>
 </resources>

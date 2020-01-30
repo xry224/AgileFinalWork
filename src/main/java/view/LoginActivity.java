@@ -29,9 +29,13 @@ public class LoginActivity extends Activity {
                 //System.out.println("username: " + uname);
                 //System.out.println("pwd: "+ pwd);
                 if (uname.equals("") || uname.equals(" ") || pwd.equals("") || pwd.equals(" ")) {
-                    Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
+                    //for debug
+                    //this method should change later
+                   /* Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    toast.show();*/
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
                 else if (!judgeUser(uname, pwd))
                 {

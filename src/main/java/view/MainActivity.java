@@ -179,6 +179,7 @@ public class MainActivity extends Activity {
         frameContent.addView(rightLinerLayout);
     }
     //显示活动卡片
+    //此部分需考虑利用ListView重写
     public void showEventCard(ArrayList<Event> events, int targetSize) {
         LinearLayout layoutRoot = findViewById(R.id.showEvent);
         layoutRoot.removeAllViews();
@@ -188,7 +189,7 @@ public class MainActivity extends Activity {
         {
             int marginTop = 15;
             //设置framelayout的布局
-            FrameLayout frameLayout = new FrameLayout(layoutRoot.getContext());
+            final FrameLayout frameLayout = new FrameLayout(layoutRoot.getContext());
             frameLayout.setBackgroundColor(Color.rgb(232,232,232));
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 400);
             layoutParams.setMargins(0, marginTop,0,0);
