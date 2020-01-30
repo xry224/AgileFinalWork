@@ -19,10 +19,7 @@ import com.example.agile.R;
 import entity.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class MainActivity extends Activity {
@@ -41,10 +38,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.event_list_item);
-
-        //LayoutInflater flater = getLayoutInflater();
-        //initView(flater);
         setContentView(R.layout.main);
         if (firstIn)
         {
@@ -52,17 +45,8 @@ public class MainActivity extends Activity {
             firstIn = false;
         }
         init();
-        //showEventCard(totalEventList, 5);
         showEventCardByListView(totalEventList, 5);
     }
-    /*
-    private void initView(LayoutInflater flater) {
-        mainView = flater.inflate(R.layout.main, null);
-        historyView = flater.inflate(R.layout.history, null);
-        accountView = flater.inflate(R.layout.account_page, null);
-        findView = flater.inflate(R.layout.find_near, null);
-    }
-     */
     private void init() {
         //底部导航栏
         RadioGroup navigate = findViewById(R.id.navigateGroup);
@@ -110,104 +94,6 @@ public class MainActivity extends Activity {
     public void clickLocation(View v) {
 
     }
-    /*
-    private void setFrameContent(FrameLayout frameContent, Event event) {
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        //framelayout中的图片
-        layoutParams.gravity = Gravity.START;
-        layoutParams.width = 450;
-        layoutParams.setMarginStart(30);
-        ImageView imageView = new ImageView(this);
-        imageView.setLayoutParams(layoutParams);
-        imageView.setImageResource(R.drawable.gym);
-        frameContent.addView(imageView);
-
-        //framelayout中的标题
-        //整个右半部分的线性布局
-        FrameLayout.LayoutParams rightlayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        rightlayoutParams.leftMargin = 520;
-        LinearLayout rightLinerLayout = new LinearLayout(this);
-        rightLinerLayout.setLayoutParams(rightlayoutParams);
-        //title本身的layoutparam
-        LinearLayout.LayoutParams llayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //llayoutParams.gravity = Gravity.LEFT;
-        rightLinerLayout.setOrientation(LinearLayout.VERTICAL);
-        //text内容设置
-        TextView title = new TextView(this);
-        title.setText(event.getEventName());
-        title.setTextColor(Color.rgb(0, 0, 0));
-        title.setTextSize(25);
-        llayoutParams.setMargins(0,20,0,0);
-        title.setLayoutParams(llayoutParams);
-        //将title添加到rightlinerLayout中
-        rightLinerLayout.addView(title);
-
-        //framelayout中的标签
-        ArrayList<String> labels = event.getLabel();
-        int length = Math.min(labels.size(), 3);
-        LinearLayout labelLiner = new LinearLayout(this);
-        //显示label的线性布局的layoutparam
-        LinearLayout.LayoutParams labelParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //文本本身的layoutparam
-        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        labelLiner.setLayoutParams(labelParams);
-        for (int i=0; i<length;++i) {
-            String content = labels.get(i);
-            TextView label = new TextView(this);
-            label.setText(content);
-            label.setTextSize(15);
-            //label.setBackgroundColor(Color.rgb(255,255,255));
-            label.setBackground(getDrawable(R.drawable.shape));
-            textParams.setMargins(10,20,0,0);
-            label.setLayoutParams(textParams);
-            labelLiner.addView(label);
-        }
-        rightLinerLayout.addView(labelLiner);
-
-        //framelayout中的地点
-        TextView pos = new TextView(this);
-        pos.setText("地点：" + event.getPosition());
-        pos.setTextColor(Color.rgb(0, 0, 0));
-        pos.setTextSize(15);
-        pos.setLayoutParams(llayoutParams);
-        //将title添加到rightlinerLayout中
-        rightLinerLayout.addView(pos);
-
-        //framelayout中的时间
-        TextView dateTime = new TextView(this);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String time = sdf.format(event.getTime());
-        dateTime.setText("活动时间：" + time);
-        dateTime.setTextColor(Color.rgb(0, 0, 0));
-        dateTime.setTextSize(12);
-        dateTime.setLayoutParams(llayoutParams);
-        //将title添加到rightlinerLayout中
-        rightLinerLayout.addView(dateTime);
-
-        frameContent.addView(rightLinerLayout);
-    }
-    //显示活动卡片
-    //此部分需考虑利用ListView重写
-    public void showEventCard(ArrayList<Event> events, int targetSize) {
-        LinearLayout layoutRoot = findViewById(R.id.showEvent);
-        layoutRoot.removeAllViews();
-        int length = Math.min(events.size(), targetSize);
-        //至多只显示targetSize个活动
-        for (int i = 0; i < length; ++i)
-        {
-            int marginTop = 15;
-            //设置framelayout的布局
-            final FrameLayout frameLayout = new FrameLayout(layoutRoot.getContext());
-            frameLayout.setBackgroundColor(Color.rgb(232,232,232));
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 400);
-            layoutParams.setMargins(0, marginTop,0,0);
-            frameLayout.setLayoutParams(layoutParams);
-            //绘制framelayout中的内容
-            setFrameContent(frameLayout, events.get(i));
-            layoutRoot.addView(frameLayout);
-        }
-    }*/
     private void showEventCardByListView(ArrayList<Event> events, int targetSize) {
         ListView listView = findViewById(R.id.eventListView);
         //ListView listView = new ListView(this);
@@ -230,11 +116,18 @@ public class MainActivity extends Activity {
             map.put("eventTitle", title);
             map.put("eventLocation", "地点：" + location);
             map.put("eventTime", "时间：" + time);
+            //处理label
+            for (int j = 1; j <= 6; ++j)
+            {
+                String key = "label" + j;
+                String value = j <= labels.size() ? labels.get(j - 1) : "";
+                map.put(key, value);
+            }
             itemList.add(map);
-           // map.put("eventLabel", labels);
         }
-        String[] key = new String[] {"eventTitle", "eventLocation", "eventTime"};
-        int[] value = new int[] {R.id.eventItemTitle, R.id.eventLocation, R.id.eventDate};
+        String[] key = new String[] {"eventTitle", "eventLocation", "eventTime", "label1", "label2", "label3", "label4", "label5", "label6"};
+        int[] value = new int[] {R.id.eventItemTitle, R.id.eventLocation, R.id.eventDate, R.id.eventLabel1, R.id.eventLabel2,
+                                                      R.id.eventLabel3, R.id.eventLabel4, R.id.eventLabel5, R.id.eventLabel6};
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, itemList, R.layout.event_list_item, key, value);
         listView.setAdapter(simpleAdapter);
     }

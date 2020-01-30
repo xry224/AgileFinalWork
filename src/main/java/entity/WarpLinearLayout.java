@@ -208,8 +208,8 @@ public class WarpLinearLayout extends ViewGroup {
             }
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WarpLinearLayout);
             grivate = typedArray.getInt(R.styleable.WarpLinearLayout_grivate, 1);
-            horizontal_Space = typedArray.getDimension(R.styleable.WarpLinearLayout_horizontal_Space, horizontal_Space);
-            vertical_Space = typedArray.getDimension(R.styleable.WarpLinearLayout_vertical_Space, vertical_Space);
+            horizontal_Space = typedArray.getDimension(R.styleable.WarpLinearLayout_horizontal_Space, 5);
+            vertical_Space = typedArray.getDimension(R.styleable.WarpLinearLayout_vertical_Space, 2);
             isFull = typedArray.getBoolean(R.styleable.WarpLinearLayout_isFull, isFull);
         }
     }

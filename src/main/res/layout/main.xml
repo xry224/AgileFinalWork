@@ -196,19 +196,6 @@
                   android:layout_marginStart="13.5dp"
                   android:layout_height="wrap_content">
         </ListView>
-        <!--
-        <ScrollView android:layout_width="match_parent"
-                    android:id="@+id/mainScroll"
-                    android:layout_marginBottom="40dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_height="wrap_content">
-            <LinearLayout android:layout_width="match_parent"
-                          android:id="@+id/showEvent"
-                          android:gravity="center"
-                          android:orientation="vertical"
-                          android:layout_height="wrap_content">
-            </LinearLayout>
-        </ScrollView> -->
         <!-- 底部导航栏 -->
         <FrameLayout android:layout_width="match_parent"
                      android:id="@+id/bottomNavigate"
