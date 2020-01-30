@@ -21,6 +21,8 @@ import entity.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -28,32 +30,39 @@ public class MainActivity extends Activity {
     private ArrayList<User> totalUserList = new ArrayList<>();
     private ArrayList<Merchant> totalMerchantList = new ArrayList<>();
     private boolean firstIn = true;
+    /*
     private View mainView = null;
     private View historyView = null;
     private View accountView = null;
     private User currentLogin = null;
     private View findView = null;
+    */
     private int lastSelectedBottomNavigator = R.id.homePageButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater flater = getLayoutInflater();
-        initView(flater);
-        setContentView(mainView);
+        //setContentView(R.layout.event_list_item);
+
+        //LayoutInflater flater = getLayoutInflater();
+        //initView(flater);
+        setContentView(R.layout.main);
         if (firstIn)
         {
             initTestData();
             firstIn = false;
         }
         init();
-        showEventCard(totalEventList, 5);
+        //showEventCard(totalEventList, 5);
+        showEventCardByListView(totalEventList, 5);
     }
+    /*
     private void initView(LayoutInflater flater) {
         mainView = flater.inflate(R.layout.main, null);
         historyView = flater.inflate(R.layout.history, null);
         accountView = flater.inflate(R.layout.account_page, null);
         findView = flater.inflate(R.layout.find_near, null);
     }
+     */
     private void init() {
         //底部导航栏
         RadioGroup navigate = findViewById(R.id.navigateGroup);
@@ -101,7 +110,7 @@ public class MainActivity extends Activity {
     public void clickLocation(View v) {
 
     }
-
+    /*
     private void setFrameContent(FrameLayout frameContent, Event event) {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -198,6 +207,36 @@ public class MainActivity extends Activity {
             setFrameContent(frameLayout, events.get(i));
             layoutRoot.addView(frameLayout);
         }
+    }*/
+    private void showEventCardByListView(ArrayList<Event> events, int targetSize) {
+        ListView listView = findViewById(R.id.eventListView);
+        //ListView listView = new ListView(this);
+        ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
+        int length = Math.min(events.size(), targetSize);
+        for (int i = 0; i < length; ++i)
+        {
+            //获取需要显示的各项数据
+            //活动图片暂且硬编码在item中
+            Event event = events.get(i);
+            Date eventTime = event.getTime();
+            String title = event.getEventName();
+            String location = event.getPosition();
+            ArrayList<String> labels = event.getLabel();
+            //格式化日期
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String time = sdf.format(eventTime);
+
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("eventTitle", title);
+            map.put("eventLocation", "地点：" + location);
+            map.put("eventTime", "时间：" + time);
+            itemList.add(map);
+           // map.put("eventLabel", labels);
+        }
+        String[] key = new String[] {"eventTitle", "eventLocation", "eventTime"};
+        int[] value = new int[] {R.id.eventItemTitle, R.id.eventLocation, R.id.eventDate};
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, itemList, R.layout.event_list_item, key, value);
+        listView.setAdapter(simpleAdapter);
     }
 
     private void initTestData() {
