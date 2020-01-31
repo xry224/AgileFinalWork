@@ -46,8 +46,8 @@ public class myAccount extends Activity {
     private void InitSetListItem(@NotNull ArrayList<HashMap<String, Object>> itemList) {
         //添加列表项
         //此函数视情况可能需要重写
-        String[] listText = new String[]{"实名认证", "设置", "关于我们", "退出登录"};
-        int[] listImage = new int[]{R.drawable.accountrealname,  R.drawable.set, R.drawable.about, R.drawable.quit_login};
+        String[] listText = new String[]{"实名认证", "设置", "退出登录", "关于我们"};
+        int[] listImage = new int[]{R.drawable.accountrealname,  R.drawable.set, R.drawable.quit, R.drawable.about};
         for (int i = 0; i < listText.length; ++i)
         {
             HashMap<String, Object> map = new HashMap<>();

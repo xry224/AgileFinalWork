@@ -16,7 +16,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Button login = findViewById(R.id.loginButton);
+        Button login = findViewById(R.id.logInButton);
         //登录按钮监听器
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,16 +26,14 @@ public class LoginActivity extends Activity {
                 EditText passwd = findViewById(R.id.password);
                 String uname = userName.getText().toString();
                 String pwd = passwd.getText().toString();
-                //System.out.println("username: " + uname);
-                //System.out.println("pwd: "+ pwd);
                 if (uname.equals("") || uname.equals(" ") || pwd.equals("") || pwd.equals(" ")) {
                     //for debug
                     //this method should change later
-                   /* Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();*/
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    toast.show();
+                    //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    //startActivity(intent);
                 }
                 else if (!judgeUser(uname, pwd))
                 {
@@ -50,6 +48,17 @@ public class LoginActivity extends Activity {
                     parseData(intent, user);
                     startActivity(intent);
                 }
+            }
+        });
+        Button test = findViewById(R.id.newUser);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

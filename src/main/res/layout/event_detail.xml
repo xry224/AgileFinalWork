@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="@color/lightGray"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" tools:ignore="MissingDefaultResource">
+    <TextView android:layout_width="match_parent"
+              android:text="活动详情"
+              android:gravity="center"
+              android:background="@color/gold"
+              android:textSize="25sp"
+              android:textStyle="bold"
+              android:layout_height="wrap_content"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:background="@color/white"
+                  android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_height="400px">
+            <ImageView android:layout_width="500px"
+                       android:id="@+id/eventImage"
+                       android:layout_marginStart="5dp"
+                       android:src="@drawable/gym"
+                       android:layout_height="wrap_content"/>
+            <LinearLayout android:layout_height="400px"
+                          android:orientation="vertical"
+                          android:layout_marginStart="10dp"
+                          android:layout_width="500px">
+                <TextView android:layout_width="wrap_content"
+                          android:textSize="25sp"
+                          android:layout_marginTop="10dp"
+                          android:id="@+id/eventTitle"
+                          android:text="健身房流汗！"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:textSize="15sp"
+                          android:layout_marginTop="10dp"
+                          android:id="@+id/eventTime"
+                          android:text="时间：2020.11.12 19:00"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:textSize="15sp"
+                          android:layout_marginTop="10dp"
+                          android:id="@+id/eventPosition"
+                          android:text="地点：南京大学体育馆"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="2dp"
+              android:background="@color/gold"/>
+        <TextView android:layout_width="match_parent"
+                  android:layout_marginTop="5dp"
+                  android:textSize="15sp"
+                  android:id="@+id/eventDes"
+                  android:text="注意事项：请大家爱惜器材，注意安全！"
+                  android:layout_height="200px"/>
+        <TextView android:layout_height="wrap_content"
+                  android:id="@+id/founder"
+                  android:layout_marginTop="2dp"
+                  android:textSize="15sp"
+                  android:layout_gravity="end"
+                  android:text="发起人：许昌舜"
+                  android:layout_width="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="5dp"
+                  android:orientation="vertical"
+                  android:background="@color/white"
+                  android:layout_height="300px">
+        <LinearLayout android:layout_height="35dp"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="5dp"
+                      android:layout_width="match_parent">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="15sp"
+                      android:layout_marginStart="5dp"
+                      android:text="已有成员"
+                      android:layout_height="wrap_content"/>
+            <Button android:layout_width="wrap_content"
+                    android:id="@+id/allMember"
+                    android:layout_marginStart="200dp"
+                    android:text="查看所有成员"
+                    android:textSize="15sp"
+                    android:background="@color/qmui_config_color_transparent"
+                    android:layout_height="30dp"/>
+        </LinearLayout>
+        <LinearLayout android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="10dp"
+                      android:layout_width="match_parent">
+            <entity.CircleImageView android:layout_width="120px"
+                                    android:layout_marginStart="5dp"
+                                    android:id="@+id/userIcon1"
+                                    android:src="@drawable/gym"
+                                    android:layout_height="120px"/>
+
+            <entity.CircleImageView android:layout_width="120px"
+                                    android:layout_marginStart="5dp"
+                                    android:id="@+id/userIcon2"
+                                    android:src="@drawable/gym"
+                                    android:layout_height="120px"/>
+            <entity.CircleImageView android:layout_height="120px"
+                                    android:id="@+id/inviteMember"
+                                    android:src="@drawable/invite"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_width="120px"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 通知功能暂且不考虑 -->
+    <ImageView android:layout_width="match_parent"
+               android:layout_marginTop="8dp"
+               android:id="@+id/eventAd"
+               android:src="@drawable/gym"
+               android:layout_height="150dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="15dp"
+                  android:orientation="vertical"
+                  android:background="@color/gold"
+                  android:layout_height="40sp">
+        <Button android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape"
+                android:text="立即加入"
+                android:textSize="20sp"
+                android:layout_height="25sp"/>
+    </LinearLayout>
+</LinearLayout>

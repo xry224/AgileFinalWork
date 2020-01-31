@@ -4,6 +4,7 @@
                 android:gravity="center"
                 android:layout_height="35dp">
     <ImageView android:layout_height="24sp"
+               android:layout_marginStart="10dp"
                android:layout_alignParentStart="true"
                android:id="@+id/setListItemImage"
                android:layout_width="24sp"/>
@@ -11,7 +12,7 @@
               android:textSize="20sp"
               android:textStyle="normal"
               android:id="@+id/setListItemText"
-              android:layout_marginStart="30sp"
+              android:layout_marginStart="40sp"
               android:layout_width="match_parent"/>
 
 </RelativeLayout>
