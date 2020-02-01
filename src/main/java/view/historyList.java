@@ -33,8 +33,8 @@ public class historyList extends Activity {
                     }
                     case R.id.newEventButton:
                     {
-                        builder.setMessage("not yet");
-                        builder.create().show();
+                        intent = new Intent(historyList.this, newEventActivity.class);
+                        startActivity(intent);
                         break;
                     }
                     case R.id.findNearByButton:

@@ -74,9 +74,8 @@ public class myAccount extends Activity {
                     }
                     case R.id.newEventButton:
                     {
-                        System.out.println("new Event Pressed!");
-                        builder.setMessage("not yet");
-                        builder.create().show();
+                        intent = new Intent(myAccount.this, newEventActivity.class);
+                        startActivity(intent);
                         break;
                     }
                     case R.id.eventListButton:

@@ -6,7 +6,8 @@
                  android:icon="@mipmap/ic_launcher"
                  android:roundIcon="@mipmap/ic_launcher_round"
                  android:supportsRtl="true"
-                 android:theme="@style/Theme.AppCompat.Light.NoActionBar" tools:ignore="GoogleAppIndexingWarning">
+                 android:theme="@style/AnimActivity"
+                 tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="view.findNearby">
         </activity>
         <activity android:name="view.historyList">
@@ -25,5 +26,6 @@
             </intent-filter>
         </activity>
         <activity android:name="view.EventDetail"></activity>
+        <activity android:name="view.newEventActivity"></activity>
     </application>
 </manifest>

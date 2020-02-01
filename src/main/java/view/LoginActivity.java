@@ -50,15 +50,13 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-        Button test = findViewById(R.id.newUser);
-        test.setOnClickListener(new View.OnClickListener() {
+        Button register = findViewById(R.id.newUser);
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(LoginActivity.this, "注册新用户！", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
     }

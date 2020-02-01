@@ -33,8 +33,8 @@ public class findNearby extends Activity {
                     }
                     case R.id.newEventButton:
                     {
-                        builder.setMessage("not yet");
-                        builder.create().show();
+                        intent = new Intent(findNearby.this, newEventActivity.class);
+                        startActivity(intent);
                         break;
                     }
                     case R.id.eventListButton:
