@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
             //格式化日期
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String time = sdf.format(eventTime);
-
+            //信息放入map
             HashMap<String, Object> map = new HashMap<>();
             map.put("eventTitle", title);
             map.put("eventLocation", "地点：" + location);
