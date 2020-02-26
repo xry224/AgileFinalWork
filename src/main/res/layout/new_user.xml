@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
               android:layout_width="match_parent"
+              android:layout_marginTop="50dp"
               android:layout_height="match_parent">
-
+    <EditText android:layout_width="320dp"
+              android:layout_gravity="center"
+              android:id="@+id/phoneOrEmail"
+              android:layout_marginTop="20dp"
+              android:inputType="text"
+              android:hint="@string/registHint1"
+              android:layout_height="50dp" tools:ignore="TextFields"/>
+    <EditText android:layout_width="320dp"
+              android:id="@+id/new_username"
+              android:inputType="text"
+              android:hint="@string/registerHint2"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center"
+              android:layout_height="50dp"/>
+    <EditText android:layout_width="320dp"
+              android:id="@+id/new_password"
+              android:inputType="textPassword"
+              android:hint="@string/registerHint3"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center"
+              android:layout_height="50dp"/>
+    <EditText android:layout_width="320dp"
+              android:id="@+id/verifyCode"
+              android:inputType="text"
+              android:hint="@string/registerHInt4"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center"
+              android:layout_height="50dp"/>
+    <Button android:layout_width="wrap_content"
+            android:id="@+id/registerButton"
+            android:text="@string/register"
+            android:layout_marginTop="20dp"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:background="@drawable/loginbuttontype"
+            android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -31,4 +31,9 @@
     <string name="loginCHN">登录</string>
     <string name="score">信用积分: 100</string>
     <string name="goodCredit">信用良好，请继续保持</string>
+    <string name="register">注册</string>
+    <string name="registHint1">手机号/邮箱</string>
+    <string name="registerHint2">用户名</string>
+    <string name="registerHint3">密码</string>
+    <string name="registerHInt4">验证码</string>
 </resources>

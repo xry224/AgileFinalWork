@@ -54,9 +54,8 @@ public class LoginActivity extends Activity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(LoginActivity.this, "注册新用户！", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                Intent intent = new Intent(LoginActivity.this, Register.class);
+                startActivity(intent);
             }
         });
     }
