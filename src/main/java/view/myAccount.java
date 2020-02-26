@@ -1,20 +1,16 @@
 package view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.agile.R;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class myAccount extends Activity {
     @Override
@@ -43,7 +39,7 @@ public class myAccount extends Activity {
     /*
      * @Description 初始化设置列表项
      */
-    private void InitSetListItem(@NotNull ArrayList<HashMap<String, Object>> itemList) {
+    private void InitSetListItem(ArrayList<HashMap<String, Object>> itemList) {
         //添加列表项
         //此函数视情况可能需要重写
         String[] listText = new String[]{"实名认证", "设置", "退出登录", "关于我们"};
