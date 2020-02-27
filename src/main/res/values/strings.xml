@@ -20,7 +20,7 @@
     <string name = "Button25">网球</string>
     <string name = "Button26">更多</string>
     <string name="navigate1">首页</string>
-    <string name="navigate2">活动列表</string>
+    <string name="navigate2">历史记录</string>
     <string name="navigate3">新建活动</string>
     <string name="navigate4">发现</string>
     <string name="navigate5">我的账户</string>

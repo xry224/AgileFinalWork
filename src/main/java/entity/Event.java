@@ -1,6 +1,5 @@
 package entity;
 
-import android.media.AudioRecord;
 import android.media.Image;
 import java.util.ArrayList;
 import java.util.Date;

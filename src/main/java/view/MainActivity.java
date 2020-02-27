@@ -15,7 +15,7 @@ import java.util.*;
 
 
 public class MainActivity extends Activity {
-    private ArrayList<Event> totalEventList = new ArrayList<>();
+    private static ArrayList<Event> totalEventList = new ArrayList<>();
     private ArrayList<User> totalUserList = new ArrayList<>();
     private ArrayList<Merchant> totalMerchantList = new ArrayList<>();
     private boolean firstIn = true;
@@ -38,6 +38,9 @@ public class MainActivity extends Activity {
         }
         init();
         showEventCardByListView(totalEventList, 5);
+    }
+    public static ArrayList<Event> getEventList() {
+        return totalEventList;
     }
     private void init() {
         //底部导航栏
