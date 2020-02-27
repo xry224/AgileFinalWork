@@ -17,7 +17,7 @@ import java.util.*;
 public class MainActivity extends Activity {
     private static ArrayList<Event> totalEventList = new ArrayList<>();
     private ArrayList<User> totalUserList = new ArrayList<>();
-    private ArrayList<Merchant> totalMerchantList = new ArrayList<>();
+    private static ArrayList<Merchant> totalMerchantList = new ArrayList<>();
     private boolean firstIn = true;
     /*
     private View mainView = null;
@@ -39,8 +39,11 @@ public class MainActivity extends Activity {
         init();
         showEventCardByListView(totalEventList, 5);
     }
-    public static ArrayList<Event> getEventList() {
+    static ArrayList<Event> getEventList() {
         return totalEventList;
+    }
+    public static ArrayList<Merchant> getTotalMerchantList() {
+        return totalMerchantList;
     }
     private void init() {
         //底部导航栏

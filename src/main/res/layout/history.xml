@@ -77,9 +77,8 @@
                   android:background="@color/white"
                   android:id="@+id/HistoryListView"
                   android:layout_marginBottom="50dp"
-                  android:layout_marginStart="13.5dp"
-                  android:layout_height="wrap_content">
-        </ListView>
+                  android:layout_marginStart="12dp"
+                  android:layout_height="wrap_content"/>
         <!-- 底部导航栏 -->
         <FrameLayout android:layout_width="match_parent"
                      android:id="@+id/bottomNavigate"

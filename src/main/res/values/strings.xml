@@ -35,5 +35,8 @@
     <string name="registHint1">手机号/邮箱</string>
     <string name="registerHint2">用户名</string>
     <string name="registerHint3">密码</string>
-    <string name="registerHInt4">验证码</string>
+    <string name="registerHint4">验证码</string>
+    <string name="newPassword">输入新密码</string>
+    <string name="confirmPW">重复新密码</string>
+    <string name="reset">重置密码</string>
 </resources>

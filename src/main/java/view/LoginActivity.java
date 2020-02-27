@@ -58,6 +58,14 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+        Button resetpw = findViewById(R.id.forgetpw);
+        resetpw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgetPW.class);
+                startActivity(intent);
+            }
+        });
     }
     private void parseData(Intent intent, User user) {
 

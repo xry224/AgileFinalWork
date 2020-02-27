@@ -1,5 +1,6 @@
 package view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +8,6 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import com.example.agile.R;
-import com.qmuiteam.qmui.nestedScroll.IQMUIContinuousNestedTopView;
 import entity.Event;
 
 import java.text.SimpleDateFormat;
@@ -43,8 +43,8 @@ public class historyList extends Activity {
             hashMap.put("time", eventTime);
             itemList.add(hashMap);
         }
-        String key[] = new String[]{"title", "description", "position", "time"};
-        int value[] = new int[]{R.id.historyTitle, R.id.historyDes, R.id.historyPos, R.id.historyTime};
+        String[] key = new String[]{"title", "description", "position", "time"};
+        int[] value = new int[]{R.id.historyTitle, R.id.historyDes, R.id.historyPos, R.id.historyTime};
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,itemList, R.layout.history_list_item, key, value);
         listView.setAdapter(simpleAdapter);
     }
