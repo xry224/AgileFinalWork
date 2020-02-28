@@ -3,11 +3,12 @@ package entity;
 import android.media.Image;
 import android.provider.ContactsContract;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*
 商家
  */
-public class Merchant {
+public class Merchant implements Serializable {
     //商家名称
     private String shopName;
     //类型可能需要更改，同Event中的image

@@ -1,12 +1,14 @@
 package entity;
 
 import android.media.Image;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 /*
     活动实体
  */
-public class Event {
+public class Event implements Serializable {
     //活动名称
     private String eventName;
     //活动地点

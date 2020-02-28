@@ -1,10 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*
     对商店的评论类
  */
-public class Comment {
+public class Comment implements Serializable {
     //评论者
     private User critic;
     //评论内容

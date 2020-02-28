@@ -1,10 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*
 用户实体
  */
-public class User {
+public class User implements Serializable {
     //用户名
     private String userName;
     //用户ID，唯一标志

@@ -143,6 +143,18 @@ public class MainActivity extends Activity {
         totalUserList.add(u4);
         //测试用商家数据
         Merchant merchant = new Merchant("南大体育馆", null, "南大鼓楼校区", "测试用场地");
+        Comment comment = new Comment("666666", 5, 10000,1, u3);
+        Comment comment1 = new Comment("不太行", 1, 1, 10000, u4);
+        Comment comment2 = new Comment("一般般，而且略贵", 3,5000,5000, u1);
+        ArrayList<String> business = new ArrayList<>();
+        business.add("足球");
+        business.add("篮球");
+        business.add("游泳");
+        business.add("健♂身");
+        merchant.setMainBusiness(business);
+        merchant.addComment(comment);
+        merchant.addComment(comment1);
+        merchant.addComment(comment2);
         totalMerchantList.add(merchant);
         //测试用活动数据
         Event event1, event2, event3, event4, event5, event6, event7, event8, event9, event10, event11;

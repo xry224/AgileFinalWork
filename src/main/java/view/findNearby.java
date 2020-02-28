@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
@@ -20,6 +22,19 @@ public class findNearby extends Activity {
         setContentView(R.layout.find_near);
         InitListener();
         initMerchantList(MainActivity.getTotalMerchantList(), 6);
+        initListListener();
+    }
+    private void initListListener() {
+        ListView listView = findViewById(R.id.findNearListView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Merchant merchant = MainActivity.getTotalMerchantList().get(position);
+                Intent intent = new Intent(findNearby.this, MerchantDetail.class);
+                intent.putExtra("shopInfo", merchant);
+                startActivity(intent);
+            }
+        });
     }
     private void initMerchantList(ArrayList<Merchant> shopList, int targetSize) {
         ListView listView = findViewById(R.id.findNearListView);

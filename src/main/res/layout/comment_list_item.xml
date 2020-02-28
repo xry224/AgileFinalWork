@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="100dp">
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/critic"
+              android:layout_marginStart="5dp"
+              android:textSize="18sp"
+              android:textStyle="bold"
+              android:layout_height="25dp"/>
+    <TextView android:layout_width="match_parent"
+              android:layout_marginTop="5dp"
+              android:layout_marginStart="10dp"
+              android:id="@+id/commentContent"
+              android:layout_height="40dp"/>
+    <LinearLayout android:layout_height="35dp"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent">
+        <ImageButton android:layout_width="35dp"
+                     android:layout_marginStart="200dp"
+                     android:id="@+id/positive"
+                     android:background="@color/qmui_config_color_transparent"
+                     android:src="@drawable/positive16"
+                     android:layout_height="match_parent"/>
+        <TextView android:layout_width="50dp"
+                  android:layout_marginTop="8dp"
+                  android:id="@+id/positiveRank"
+                  android:textSize="12sp"
+                  android:text="10000"
+                  android:layout_height="match_parent"/>
+        <ImageButton android:layout_width="35dp"
+                     android:id="@+id/negative"
+                     android:background="@color/qmui_config_color_transparent"
+                     android:src="@drawable/negative16"
+                     android:layout_height="match_parent"/>
+        <TextView android:layout_width="50dp"
+                  android:id="@+id/negativeRank"
+                  android:textSize="12sp"
+                  android:layout_marginTop="8dp"
+                  android:text="10000"
+                  android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>

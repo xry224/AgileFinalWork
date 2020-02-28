@@ -28,5 +28,6 @@
         <activity android:name="view.newEventActivity"/>
         <activity android:name="view.Register"/>
         <activity android:name="view.ForgetPW"/>
+        <activity android:name="view.MerchantDetail"/>
     </application>
 </manifest>
