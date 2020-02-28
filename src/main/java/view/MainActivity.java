@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
     static ArrayList<Event> getEventList() {
         return totalEventList;
     }
-    public static ArrayList<Merchant> getTotalMerchantList() {
+    static ArrayList<Merchant> getTotalMerchantList() {
         return totalMerchantList;
     }
     private void init() {
@@ -85,6 +85,14 @@ public class MainActivity extends Activity {
                     }
                 } //end of switch
                 //startActivity(intent);
+            }
+        });
+        ImageButton message = findViewById(R.id.messageButton);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+                startActivity(intent);
             }
         });
     }

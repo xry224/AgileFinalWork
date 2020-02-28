@@ -39,4 +39,6 @@
     <string name="newPassword">输入新密码</string>
     <string name="confirmPW">重复新密码</string>
     <string name="reset">重置密码</string>
+    <string name="accept">接受</string>
+    <string name="reject">拒绝</string>
 </resources>
