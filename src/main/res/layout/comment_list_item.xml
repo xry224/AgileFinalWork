@@ -3,12 +3,35 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="100dp">
-    <TextView android:layout_width="match_parent"
-              android:id="@+id/critic"
-              android:layout_marginStart="5dp"
-              android:textSize="18sp"
-              android:textStyle="bold"
-              android:layout_height="25dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/critic"
+                      android:layout_marginStart="5dp"
+                      android:textSize="18sp"
+                      android:layout_gravity="start|center_vertical"
+                      android:textStyle="bold"
+                      android:layout_height="25dp"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <RatingBar android:layout_width="wrap_content"
+                       style="@style/Widget.AppCompat.RatingBar.Small"
+                       android:layout_marginEnd="10dp"
+                       android:numStars="5"
+                       android:isIndicator="true"
+                       android:layout_gravity="end|center_vertical"
+                       android:layout_marginTop="5dp"
+                       android:stepSize="0.5"
+                       android:id="@+id/userRank"
+                       android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
     <TextView android:layout_width="match_parent"
               android:layout_marginTop="5dp"
               android:layout_marginStart="10dp"

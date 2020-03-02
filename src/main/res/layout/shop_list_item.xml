@@ -13,6 +13,13 @@
                   android:textStyle="bold"
                   android:id="@+id/ShopTitle"
                   android:layout_height="wrap_content"/>
+        <RatingBar android:layout_width="wrap_content"
+                   style="@style/Widget.AppCompat.RatingBar.Indicator"
+                   android:layout_marginStart="10dp"
+                   android:numStars="5"
+                   android:stepSize="0.5"
+                   android:id="@+id/shopTotalRank"
+                   android:layout_height="match_parent"/>
     </LinearLayout>
 
     <View android:layout_height="1dp"

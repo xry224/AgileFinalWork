@@ -6,6 +6,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.agile.R;
 import entity.Message;
+import entity.MessageAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,6 @@ public class MessageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_list);
         TestMessageList();
-
         //showMessageList(messages);
     }
     private void TestMessageList() {
@@ -36,8 +36,9 @@ public class MessageActivity extends Activity {
         }
         String[] key = new String[]{"applicant", "message", "credit"};
         int[] value = new int[]{R.id.messgaeFrom, R.id.messageContent, R.id.userCredit};
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, itemList, R.layout.message_list_item, key, value);
-        listView.setAdapter(simpleAdapter);
+        MessageAdapter adapter = new MessageAdapter(this, itemList, R.layout.message_list_item, key, value);
+        listView.setAdapter(adapter);
+
     }
     private void showMessageList(ArrayList<Message> messageList) {
         ListView listView = findViewById(R.id.messageList);

@@ -11,7 +11,7 @@ public class Comment implements Serializable {
     //评论内容
     private String content;
     //评分
-    private int rank;
+    private double rank;
     //暂不考虑对评论的回复
     private ArrayList<String> replay;
     //点赞数
@@ -19,7 +19,7 @@ public class Comment implements Serializable {
     //点踩数
     private int negative;
 
-    public Comment(String content, int rank, int positive, int negative, User user) {
+    public Comment(String content, double rank, int positive, int negative, User user) {
         this.content = content;
         this.rank = rank;
         this.positive = positive;
@@ -46,11 +46,11 @@ public class Comment implements Serializable {
         this.content = content;
     }
 
-    public int getRank() {
+    public double getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(double rank) {
         this.rank = rank;
     }
 

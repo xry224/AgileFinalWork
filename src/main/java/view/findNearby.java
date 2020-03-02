@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import com.example.agile.R;
 import entity.Merchant;
+import entity.RatingBarAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,15 +41,17 @@ public class findNearby extends Activity {
         ListView listView = findViewById(R.id.findNearListView);
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
         int length = Math.min(targetSize, shopList.size());
+        double[] ranks = new double[length];
         for (int i = 0; i < length; ++i) {
             Merchant merchant = shopList.get(i);
-            int rank = merchant.getRank();
+            double rank = merchant.getRank();
             String name = merchant.getShopName();
             String position = "地点: " + merchant.getPosition();
             String des = merchant.getDescription();
             //图片相关的处理
             HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("rank", rank);
+            //hashMap.put("rank", rank);
+            ranks[i] = rank;
             hashMap.put("shopName", name);
             hashMap.put("Position", position);
             hashMap.put("description", des);
@@ -56,8 +59,8 @@ public class findNearby extends Activity {
         }
         String[] key = new String[]{"shopName", "Position", "description"};
         int[] value = new int[]{R.id.ShopTitle, R.id.shopPosition, R.id.shopDes};
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, itemList, R.layout.shop_list_item, key, value);
-        listView.setAdapter(simpleAdapter);
+        RatingBarAdapter adapter = new  RatingBarAdapter(this, itemList, R.layout.shop_list_item, key, value, ranks);
+        listView.setAdapter(adapter);
     }
     private void InitListener() {
         //底部导航栏

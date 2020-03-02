@@ -1,17 +1,18 @@
 package view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.example.agile.R;
 import entity.Comment;
+import entity.CommentAdapter;
 import entity.Merchant;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MerchantDetail extends Activity {
     private Merchant merchant;
@@ -47,30 +48,66 @@ public class MerchantDetail extends Activity {
         bus.setText(business);
 
         showComment(comments, 5);
-    }
 
+        Button newComment = findViewById(R.id.newComment);
+        newComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newCommentDialog();
+            }
+        });
+    }
+    private void newCommentDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MerchantDetail.this);
+        final AlertDialog alertDialog = builder.create();
+        View dialogView = View.inflate(MerchantDetail.this, R.layout.new_comment, null);
+        alertDialog.setView(dialogView);
+        alertDialog.show();
+
+        Button publish = dialogView.findViewById(R.id.publishComment);
+        Button cancel = dialogView.findViewById(R.id.cancelComment);
+        publish.setText("发表");
+        cancel.setText("取消");
+        publish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo: about new comment
+                alertDialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
     private void showComment(ArrayList<Comment> commentList, int Size) {
         int length = Math.min(Size, commentList.size());
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
         ListView listView = findViewById(R.id.commentList);
+        double[] ranks = new double[length];
         for (int i = 0; i < length; ++i) {
             Comment comment = commentList.get(i);
             String critic = comment.getCritic().getUserName();
             String content = comment.getContent();
             int positive = comment.getPositive();
             int negative = comment.getNegative();
+            double rank = comment.getRank();
 
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("commenter", critic);
             hashMap.put("content", content);
             hashMap.put("support",positive);
             hashMap.put("oppose",negative);
+            ranks[i] = rank;
             itemList.add(hashMap);
         }
         String[] key = new String[]{"commenter", "content", "support", "oppose"};
         int[] value = new int[]{R.id.critic, R.id.commentContent, R.id.positiveRank, R.id.negativeRank};
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this,itemList, R.layout.comment_list_item,key, value);
-        listView.setAdapter(simpleAdapter);
+        CommentAdapter adapter = new CommentAdapter(this,itemList, R.layout.comment_list_item,key, value, ranks);
+        listView.setAdapter(adapter);
     }
 
     public void setMerchant(Merchant merchant) {

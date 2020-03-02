@@ -19,14 +19,6 @@ public class MainActivity extends Activity {
     private ArrayList<User> totalUserList = new ArrayList<>();
     private static ArrayList<Merchant> totalMerchantList = new ArrayList<>();
     private boolean firstIn = true;
-    /*
-    private View mainView = null;
-    private View historyView = null;
-    private View accountView = null;
-    private User currentLogin = null;
-    private View findView = null;
-    */
-    private int lastSelectedBottomNavigator = R.id.homePageButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +146,7 @@ public class MainActivity extends Activity {
         Comment comment = new Comment("666666", 5, 10000,1, u3);
         Comment comment1 = new Comment("不太行", 1, 1, 10000, u4);
         Comment comment2 = new Comment("一般般，而且略贵", 3,5000,5000, u1);
+        merchant.setRank(3);
         ArrayList<String> business = new ArrayList<>();
         business.add("足球");
         business.add("篮球");

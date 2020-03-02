@@ -24,7 +24,7 @@ public class Merchant implements Serializable {
     //商店评论
     private ArrayList<Comment> commentList;
     //商店评分,-1代表新店
-    private int rank;
+    private double rank;
 
     public Merchant(String shopName, Image titleImage, String position, String description) {
         commentList = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Merchant implements Serializable {
         rank = -1;
     }
 
-    public Merchant(String shopName, Image titleImage, ArrayList<Image> imageList, String position, int rank,
+    public Merchant(String shopName, Image titleImage, ArrayList<Image> imageList, String position, double rank,
                     ArrayList<String> mainBusiness, String description, ArrayList<Comment> commentList) {
         this.shopName = shopName;
         this.titleImage = titleImage;
@@ -49,11 +49,11 @@ public class Merchant implements Serializable {
         this.rank = rank;
     }
 
-    public int getRank() {
+    public double getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(double rank) {
         this.rank = rank;
     }
 
