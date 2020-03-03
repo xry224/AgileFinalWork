@@ -9,12 +9,12 @@
                   android:orientation="horizontal"
                   android:layout_height="wrap_content">
         <ImageView android:layout_width="128sp"
-                                android:id="@+id/userImage"
-                                android:clickable="true"
-                                android:background="@color/qmui_config_color_transparent"
-                                android:src="@drawable/account128"
-                                android:layout_marginStart="30dp"
-                                android:layout_height="128sp"/>
+                   android:id="@+id/userImage"
+                   android:clickable="true"
+                   android:background="@color/qmui_config_color_transparent"
+                   android:src="@drawable/account128"
+                   android:layout_marginStart="30dp"
+                   android:layout_height="128sp"/>
         <LinearLayout android:layout_width="wrap_content"
                       android:orientation="vertical"
                       android:layout_marginStart="30dp"
@@ -67,57 +67,52 @@
           android:layout_height="2dp"
           android:layout_marginTop="2dp"
           android:background="@color/black"/>
-    <!-- 底部导航栏 -->
-    <RelativeLayout android:layout_width="match_parent"
-                    android:id="@+id/accountRelative"
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="match_parent">
+        <!-- 底部导航栏 -->
+        <RadioGroup android:layout_width="match_parent"
+                    android:id="@+id/navigateGroup"
+                    android:background="@color/Gainsboro"
+                    android:orientation="horizontal"
+                    android:layout_gravity="bottom"
                     android:layout_height="wrap_content">
-        <FrameLayout android:layout_width="match_parent"
-                     android:id="@+id/bottomNavigate"
-                     android:layout_alignParentBottom="true"
-                     android:layout_height="wrap_content">
-            <RadioGroup android:layout_width="match_parent"
-                        android:id="@+id/navigateGroup"
-                        android:background="@color/Gainsboro"
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent">
-                <RadioButton android:layout_width="wrap_content"
-                             android:text="@string/navigate1"
-                             style="@style/TabRadioButton"
-                             android:id="@+id/homePageButton"
-                             android:checked="false"
-                             android:drawableTop="@drawable/home16"
-                             android:layout_height="wrap_content"/>
-                <RadioButton android:layout_width="wrap_content"
-                             android:text="@string/navigate2"
-                             style="@style/TabRadioButton"
-                             android:id="@+id/eventListButton"
-                             android:checked="false"
-                             android:drawableTop="@drawable/history16"
-                             android:layout_height="wrap_content"/>
-                <RadioButton android:layout_width="wrap_content"
-                             style="@style/TabRadioButton"
-                             android:id="@+id/newEventButton"
-                             android:text="@string/navigate3"
-                             android:checked="false"
-                             android:drawableTop="@drawable/add16"
-                             android:layout_height="wrap_content"/>
-                <RadioButton android:layout_width="wrap_content"
-                             android:text="@string/navigate4"
-                             style="@style/TabRadioButton"
-                             android:id="@+id/findNearByButton"
-                             android:checked="false"
-                             android:drawableTop="@drawable/find16"
-                             android:layout_height="wrap_content"/>
-                <RadioButton android:layout_width="wrap_content"
-                             android:text="@string/navigate5"
-                             style="@style/TabRadioButton"
-                             android:id="@+id/myAccountButton"
-                             android:checked="true"
-                             android:drawableTop="@drawable/account16select"
-                             android:layout_height="wrap_content"/>
+            <RadioButton android:layout_width="wrap_content"
+                         android:text="@string/navigate1"
+                         style="@style/TabRadioButton"
+                         android:id="@+id/homePageButton"
+                         android:checked="false"
+                         android:drawableTop="@drawable/home16"
+                         android:layout_height="wrap_content"/>
+            <RadioButton android:layout_width="wrap_content"
+                         android:text="@string/navigate2"
+                         style="@style/TabRadioButton"
+                         android:id="@+id/eventListButton"
+                         android:checked="false"
+                         android:drawableTop="@drawable/history16"
+                         android:layout_height="wrap_content"/>
+            <RadioButton android:layout_width="wrap_content"
+                         style="@style/TabRadioButton"
+                         android:id="@+id/newEventButton"
+                         android:text="@string/navigate3"
+                         android:checked="false"
+                         android:drawableTop="@drawable/add16"
+                         android:layout_height="wrap_content"/>
+            <RadioButton android:layout_width="wrap_content"
+                         android:text="@string/navigate4"
+                         style="@style/TabRadioButton"
+                         android:id="@+id/findNearByButton"
+                         android:checked="false"
+                         android:drawableTop="@drawable/find16"
+                         android:layout_height="wrap_content"/>
+            <RadioButton android:layout_width="wrap_content"
+                         android:text="@string/navigate5"
+                         style="@style/TabRadioButton"
+                         android:id="@+id/myAccountButton"
+                         android:checked="true"
+                         android:drawableTop="@drawable/account16select"
+                         android:layout_height="wrap_content"/>
 
-            </RadioGroup>
-        </FrameLayout>
-
-    </RelativeLayout>
+        </RadioGroup>
+    </LinearLayout>
 </LinearLayout>
