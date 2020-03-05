@@ -1,12 +1,12 @@
-package view;
+package Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.agile.R;
-import entity.Message;
-import entity.MessageAdapter;
+import Bean.Message;
+import myView.MessageAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,5 @@
-package view;
+package Activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import com.example.agile.R;
-import entity.Event;
+import Bean.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package entity;
+package Bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ public class User implements Serializable {
     //用户名
     private String userName;
     //用户ID，唯一标志
+    //该标志或许可由手机号/邮箱替代
     private String userID;
     //真实姓名
     private String realName;
@@ -16,15 +17,16 @@ public class User implements Serializable {
     private int rankScore;
     //是否实名认证
     private boolean hasAuthentication;
-    //参加活动的列表
+    //创建的活动的列表
     private ArrayList<Event> eventList;
     //评论列表
     private ArrayList<Comment> comments;
-    //历史活动记录暂不考虑
+    //参与的所有活动的历史记录
     private ArrayList<Event> historyEvent;
     //需要通知的活动
+    //通知功能暂时不考虑
     private ArrayList<Event> needNotification;
-    //用户信息
+    //用户手机号与邮箱
     private String email;
     private String phoneNumber;
 

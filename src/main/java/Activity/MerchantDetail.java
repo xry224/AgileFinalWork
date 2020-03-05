@@ -1,4 +1,4 @@
-package view;
+package Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.agile.R;
-import entity.Comment;
-import entity.CommentAdapter;
-import entity.Merchant;
+import Bean.Comment;
+import myView.CommentAdapter;
+import Bean.Merchant;
 import java.util.ArrayList;
 import java.util.HashMap;
 

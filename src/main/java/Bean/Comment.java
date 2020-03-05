@@ -1,4 +1,4 @@
-package entity;
+package Bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class Comment implements Serializable {
     private String content;
     //评分
     private double rank;
+    //对评论的回复
     //暂不考虑对评论的回复
     private ArrayList<String> replay;
     //点赞数

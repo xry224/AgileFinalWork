@@ -1,8 +1,6 @@
-package entity;
+package Bean;
 
-import android.media.Image;
-import android.provider.ContactsContract;
-
+import android.graphics.Bitmap;
 import java.io.Serializable;
 import java.util.ArrayList;
 /*
@@ -12,9 +10,9 @@ public class Merchant implements Serializable {
     //商家名称
     private String shopName;
     //类型可能需要更改，同Event中的image
-    private Image titleImage;
+    private Bitmap titleImage;
     //店内预览图
-    private ArrayList<Image> imageList;
+    private ArrayList<Bitmap> imageList;
     //上架位置
     private String position;
     //主营业务
@@ -26,7 +24,7 @@ public class Merchant implements Serializable {
     //商店评分,-1代表新店
     private double rank;
 
-    public Merchant(String shopName, Image titleImage, String position, String description) {
+    public Merchant(String shopName, Bitmap titleImage, String position, String description) {
         commentList = new ArrayList<>();
         mainBusiness = new ArrayList<>();
         imageList = new ArrayList<>();
@@ -37,7 +35,7 @@ public class Merchant implements Serializable {
         rank = -1;
     }
 
-    public Merchant(String shopName, Image titleImage, ArrayList<Image> imageList, String position, double rank,
+    public Merchant(String shopName, Bitmap titleImage, ArrayList<Bitmap> imageList, String position, double rank,
                     ArrayList<String> mainBusiness, String description, ArrayList<Comment> commentList) {
         this.shopName = shopName;
         this.titleImage = titleImage;
@@ -58,10 +56,10 @@ public class Merchant implements Serializable {
     }
 
     //此方法参数视情况修改
-    public void addImage(Image image) {
+    public void addImage(Bitmap image) {
         imageList.add(image);
     }
-    public void removeImage(Image image) {
+    public void removeImage(Bitmap image) {
         imageList.remove(image);
     }
 
@@ -78,11 +76,11 @@ public class Merchant implements Serializable {
         this.shopName = shopName;
     }
 
-    public void setTitleImage(Image titleImage) {
+    public void setTitleImage(Bitmap titleImage) {
         this.titleImage = titleImage;
     }
 
-    public void setImageList(ArrayList<Image> imageList) {
+    public void setImageList(ArrayList<Bitmap> imageList) {
         this.imageList = imageList;
     }
 
@@ -102,11 +100,11 @@ public class Merchant implements Serializable {
         return shopName;
     }
 
-    public Image getTitleImage() {
+    public Bitmap getTitleImage() {
         return titleImage;
     }
 
-    public ArrayList<Image> getImageList() {
+    public ArrayList<Bitmap> getImageList() {
         return imageList;
     }
 

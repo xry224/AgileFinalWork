@@ -1,4 +1,4 @@
-package view;
+package Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.SimpleAdapter;
 import com.example.agile.R;
-import entity.Merchant;
-import entity.RatingBarAdapter;
+import Bean.Merchant;
+import myView.RatingBarAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

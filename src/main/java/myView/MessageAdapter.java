@@ -1,22 +1,19 @@
-package entity;
-
+package myView;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.example.agile.R;
-
 import java.util.List;
 import java.util.Map;
 
-public class RatingBarAdapter extends SimpleAdapter {
+public class MessageAdapter extends SimpleAdapter {
     private LayoutInflater mInflater;
-    private double[] ranks;
+    private Context context;
     /**
      * Constructor
      *
@@ -31,19 +28,37 @@ public class RatingBarAdapter extends SimpleAdapter {
      * @param to       The views that should display column in the "from" parameter. These should all be
      *                 TextViews. The first N views in this list are given the values of the first N columns
      */
-    public RatingBarAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, double[] rank) {
+    public MessageAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
         mInflater = LayoutInflater.from(context);
-        ranks = rank;
+        this.context = context;
     }
+
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
+        final int index = position;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.shop_list_item, parent, false);
+            convertView = mInflater.inflate(R.layout.message_list_item, parent, false);
         }
-        RatingBar ratingBar = convertView.findViewById(R.id.shopTotalRank);
-        double rank = ranks[position];
-        ratingBar.setRating((float) rank);
+        Button accept = convertView.findViewById(R.id.accept);
+        Button reject = convertView.findViewById(R.id.reject);
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(context, index + " accept!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        });
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(context, index + " reject!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        });
         return super.getView(position, convertView, parent);
     }
 }
+

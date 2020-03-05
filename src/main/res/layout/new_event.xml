@@ -62,7 +62,7 @@
                 android:background="@drawable/shape"
                 android:layout_height="30dp"/>
     </LinearLayout>
-    <entity.WarpLinearLayout android:layout_width="310dp"
+    <myView.WarpLinearLayout android:layout_width="310dp"
                              android:layout_marginTop="5dp"
                              android:layout_gravity="center"
                              android:id="@+id/labelList"
@@ -78,7 +78,7 @@
                   android:background="@drawable/shape"
                   android:textSize="15sp"
                   android:layout_height="25dp"/>
-    </entity.WarpLinearLayout>
+    </myView.WarpLinearLayout>
     <TextView android:layout_width="wrap_content"
               android:text="活动日期"
               android:textStyle="bold"

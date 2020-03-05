@@ -1,4 +1,4 @@
-package entity;
+package myView;
 
 import android.content.Context;
 import android.util.AttributeSet;

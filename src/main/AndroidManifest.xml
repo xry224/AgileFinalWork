@@ -8,27 +8,27 @@
                  android:supportsRtl="true"
                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
                  tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="view.findNearby">
+        <activity android:name="Activity.findNearby">
         </activity>
-        <activity android:name="view.historyList">
+        <activity android:name="Activity.historyList">
         </activity>
-        <activity android:name="view.myAccount">
+        <activity android:name="Activity.myAccount">
         </activity>
         <activity
-                android:name="view.MainActivity"
+                android:name="Activity.MainActivity"
                 android:label="出游" >
          </activity>
-        <activity android:name="view.LoginActivity">
+        <activity android:name="Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="view.EventDetail"/>
-        <activity android:name="view.newEventActivity"/>
-        <activity android:name="view.Register"/>
-        <activity android:name="view.ForgetPW"/>
-        <activity android:name="view.MerchantDetail"/>
-        <activity android:name="view.MessageActivity"/>
+        <activity android:name="Activity.EventDetail"/>
+        <activity android:name="Activity.newEventActivity"/>
+        <activity android:name="Activity.Register"/>
+        <activity android:name="Activity.ForgetPW"/>
+        <activity android:name="Activity.MerchantDetail"/>
+        <activity android:name="Activity.MessageActivity"/>
     </application>
 </manifest>

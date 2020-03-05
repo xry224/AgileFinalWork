@@ -1,6 +1,6 @@
-package entity;
+package Bean;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Event implements Serializable {
     //活动的预览图片
     //将其显示在UI前需要将其转换为其他类型
     //此类型可能需要根据数据库实际存储情况做改变
-    private Image picture;
+    private Bitmap picture;
     //通知、立即加入与广告相关不属于Event实体
     public Event(String name, String pos, Date timestamp, String des, User found, String id) {
         label = new ArrayList<>();
@@ -101,7 +101,7 @@ public class Event implements Serializable {
         return eventID;
     }
 
-    public Image getPicture() {
+    public Bitmap getPicture() {
         return picture;
     }
     public void addMember(User u) {
@@ -127,7 +127,7 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public void setPicture(Image picture) {
+    public void setPicture(Bitmap picture) {
         this.picture = picture;
     }
 }

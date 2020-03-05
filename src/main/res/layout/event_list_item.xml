@@ -22,7 +22,7 @@
                   android:id="@+id/eventItemTitle"
                   android:layout_height="wrap_content"/>
             <!-- label -->
-            <entity.WarpLinearLayout android:layout_width="380px"
+            <myView.WarpLinearLayout android:layout_width="380px"
                                      android:id="@+id/eventLabel"
                                      android:layout_gravity="left"
                                      android:layout_marginTop="2dp"
@@ -62,7 +62,7 @@
                           android:background="@drawable/shape"
                           android:id="@+id/eventLabel6"
                           android:layout_height="wrap_content"/>
-            </entity.WarpLinearLayout>
+            </myView.WarpLinearLayout>
         <TextView android:layout_width="wrap_content"
                   android:id="@+id/eventLocation"
                   android:textSize="15sp"

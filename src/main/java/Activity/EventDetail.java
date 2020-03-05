@@ -1,9 +1,9 @@
-package view;
+package Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import com.example.agile.R;
-import entity.Event;
+import Bean.Event;
 
 public class EventDetail extends Activity {
     private static Event event = null;

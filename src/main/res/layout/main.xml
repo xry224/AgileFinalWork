@@ -189,7 +189,7 @@
             </LinearLayout>
 
             <!-- 活动选项卡显示 -->
-            <entity.ListViewForScroll android:layout_width="wrap_content"
+            <myView.ListViewForScroll android:layout_width="wrap_content"
                                       android:divider="@color/white"
                                       android:dividerHeight="3dp"
                                       android:background="@color/white"
@@ -198,7 +198,7 @@
                                       android:layout_marginBottom="5dp"
                                       android:layout_marginStart="13.5dp"
                                       android:layout_height="wrap_content">
-            </entity.ListViewForScroll>
+            </myView.ListViewForScroll>
         </LinearLayout>
     </ScrollView>
     <!-- 底部导航栏 -->

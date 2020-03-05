@@ -91,18 +91,18 @@
                       android:orientation="horizontal"
                       android:layout_marginTop="10dp"
                       android:layout_width="match_parent">
-            <entity.CircleImageView android:layout_width="120px"
+            <myView.CircleImageView android:layout_width="120px"
                                     android:layout_marginStart="5dp"
                                     android:id="@+id/userIcon1"
                                     android:src="@drawable/gym"
                                     android:layout_height="120px"/>
 
-            <entity.CircleImageView android:layout_width="120px"
+            <myView.CircleImageView android:layout_width="120px"
                                     android:layout_marginStart="5dp"
                                     android:id="@+id/userIcon2"
                                     android:src="@drawable/gym"
                                     android:layout_height="120px"/>
-            <entity.CircleImageView android:layout_height="120px"
+            <myView.CircleImageView android:layout_height="120px"
                                     android:id="@+id/inviteMember"
                                     android:src="@drawable/invite"
                                     android:layout_marginStart="10dp"

@@ -1,6 +1,10 @@
-package view;
+package Activity;
 
 
+import Bean.Comment;
+import Bean.Event;
+import Bean.Merchant;
+import Bean.User;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -8,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.example.agile.R;
-import entity.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
