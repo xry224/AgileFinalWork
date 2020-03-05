@@ -1,5 +1,7 @@
 package Bean;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 /*
@@ -9,7 +11,7 @@ public class User implements Serializable {
     //用户名
     private String userName;
     //用户ID，唯一标志
-    //该标志或许可由手机号/邮箱替代
+    //该标志或许可由邮箱替代
     private String userID;
     //真实姓名
     private String realName;
@@ -21,16 +23,19 @@ public class User implements Serializable {
     private ArrayList<Event> eventList;
     //评论列表
     private ArrayList<Comment> comments;
-    //参与的所有活动的历史记录
+    //参与的所有活动的历史记录，此列表内容包括eventList，或许可以去掉eventList，使用时根据Event中的founder属性进行筛选
     private ArrayList<Event> historyEvent;
     //需要通知的活动
     //通知功能暂时不考虑
     private ArrayList<Event> needNotification;
-    //用户手机号与邮箱
+    //用户邮箱
     private String email;
-    private String phoneNumber;
+    //用户信息列表
+    private ArrayList<Message> messageBox;
+    //用户头像
+    private Bitmap userIcon;
 
-    public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication, String email, String phoneNumber) {
+    public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication, String email) {
         eventList = new ArrayList<>();
         historyEvent = new ArrayList<>();
         needNotification = new ArrayList<>();
@@ -41,11 +46,27 @@ public class User implements Serializable {
         this.rankScore = rankScore;
         this.hasAuthentication = hasAuthentication;
         this.email = email;
-        this.phoneNumber = phoneNumber;
     }
 
     public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication, ArrayList<Event> eventList,
-                ArrayList<Event> historyEvent, ArrayList<Event> needNotification, ArrayList<Comment> comments, String email, String phoneNumber) {
+                ArrayList<Comment> comments, ArrayList<Event> historyEvent, ArrayList<Event> needNotification, String email,
+                ArrayList<Message> messageBox, Bitmap userIcon) {
+        this.userName = userName;
+        this.userID = userID;
+        this.realName = realName;
+        this.rankScore = rankScore;
+        this.hasAuthentication = hasAuthentication;
+        this.eventList = eventList;
+        this.comments = comments;
+        this.historyEvent = historyEvent;
+        this.needNotification = needNotification;
+        this.email = email;
+        this.messageBox = messageBox;
+        this.userIcon = userIcon;
+    }
+
+    public User(String userName, String userID, String realName, int rankScore, boolean hasAuthentication, ArrayList<Event> eventList,
+                ArrayList<Event> historyEvent, ArrayList<Event> needNotification, ArrayList<Comment> comments, String email) {
 
         this.userName = userName;
         this.userID = userID;
@@ -57,7 +78,6 @@ public class User implements Serializable {
         this.comments = comments;
         this.needNotification = needNotification;
         this.email = email;
-        this.phoneNumber = phoneNumber;
     }
     private User()
     {
@@ -71,7 +91,6 @@ public class User implements Serializable {
         this.rankScore = 100;
         this.hasAuthentication = true;
         this.email = "test@teat.com";
-        this.phoneNumber = "123456";
     }
     //该方法可能被移植到DataBase相关类中
     public static User getUser(String userName, String passwd) {
@@ -85,14 +104,6 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public void addComment (Comment comment) {
@@ -177,5 +188,17 @@ public class User implements Serializable {
 
     public boolean isHasAuthentication() {
         return hasAuthentication;
+    }
+
+    public ArrayList<Message> getMessageBox() {
+        return messageBox;
+    }
+
+    public void setMessageBox(ArrayList<Message> messageBox) {
+        this.messageBox = messageBox;
+    }
+
+    public Bitmap getUserIcon() {
+        return userIcon;
     }
 }

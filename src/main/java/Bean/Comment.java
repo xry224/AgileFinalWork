@@ -6,6 +6,8 @@ import java.util.ArrayList;
     对商店的评论类
  */
 public class Comment implements Serializable {
+    //用于区分评论的Id，可视情况修改为其他属性的组合
+    private String commentId;
     //评论者
     private User critic;
     //评论内容
@@ -69,5 +71,9 @@ public class Comment implements Serializable {
 
     public void setNegative(int negative) {
         this.negative = negative;
+    }
+
+    public String getCommentId() {
+        return commentId;
     }
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 商家
  */
 public class Merchant implements Serializable {
+    //商家的唯一标志ID
+    private String shopId;
     //商家名称
     private String shopName;
     //类型可能需要更改，同Event中的image
@@ -122,5 +124,9 @@ public class Merchant implements Serializable {
 
     public ArrayList<Comment> getCommentList() {
         return commentList;
+    }
+
+    public String getShopId() {
+        return shopId;
     }
 }

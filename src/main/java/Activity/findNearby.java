@@ -9,11 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import com.example.agile.R;
-import Bean.Merchant;
 import myView.RatingBarAdapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import Bean.Merchant;
 
 public class findNearby extends Activity {
     @Override

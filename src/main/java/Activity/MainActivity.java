@@ -1,6 +1,5 @@
 package Activity;
 
-
 import Bean.Comment;
 import Bean.Event;
 import Bean.Merchant;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.example.agile.R;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -90,6 +88,14 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+        ListView listView = findViewById(R.id.eventListView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, EventDetail.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void clickLocation(View v) {
@@ -136,10 +142,10 @@ public class MainActivity extends Activity {
     private void initTestData() {
         //测试用用户数据
         User u1, u2, u3, u4;
-        u1 = new User("彼得大弟", "MF1932209", "徐世诚", 100, true, "smail1@nju.edu.cn", "1234561");
-        u2 = new User("test", "MF1932208", "徐戎越", 100, true, "smail2@nju.edu.cn", "1234562");
-        u3 = new User("臭弟弟", "MF1932212", "许昌舜", 100, true, "smail3@nju.edu.cn", "1234563");
-        u4 = new User("牛逼", "MF1932118", "刘少国", 100, true,"smail4@nju.edu.cn", "1234564");
+        u1 = new User("彼得大弟", "MF1932209", "徐世诚", 100, true, "smail1@nju.edu.cn");
+        u2 = new User("test", "MF1932208", "徐戎越", 100, true, "smail2@nju.edu.cn");
+        u3 = new User("臭弟弟", "MF1932212", "许昌舜", 100, true, "smail3@nju.edu.cn");
+        u4 = new User("牛逼", "MF1932118", "刘少国", 100, true,"smail4@nju.edu.cn");
         totalUserList.add(u1);
         totalUserList.add(u2);
         totalUserList.add(u3);

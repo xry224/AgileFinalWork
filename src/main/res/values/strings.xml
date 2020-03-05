@@ -24,7 +24,7 @@
     <string name="navigate3">新建活动</string>
     <string name="navigate4">发现</string>
     <string name="navigate5">我的账户</string>
-    <string name="loginNameHint">用户名/邮箱/手机号</string>
+    <string name="loginNameHint">用户名/邮箱</string>
     <string name="loginPwHint">密码</string>
     <string name="newUser">快速注册</string>
     <string name="forgetpw">忘记密码</string>
@@ -32,7 +32,7 @@
     <string name="score">信用积分: 100</string>
     <string name="goodCredit">信用良好，请继续保持</string>
     <string name="register">注册</string>
-    <string name="registHint1">手机号/邮箱</string>
+    <string name="registHint1">邮箱</string>
     <string name="registerHint2">用户名</string>
     <string name="registerHint3">密码</string>
     <string name="registerHint4">验证码</string>

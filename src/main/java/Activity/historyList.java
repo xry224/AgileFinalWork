@@ -1,5 +1,6 @@
 package Activity;
 
+import Bean.Event;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +8,6 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import com.example.agile.R;
-import Bean.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

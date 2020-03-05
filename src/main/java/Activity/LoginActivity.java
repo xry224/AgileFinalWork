@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.agile.R;
 import Bean.User;
-
 public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
