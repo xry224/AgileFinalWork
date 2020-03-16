@@ -3,32 +3,53 @@ package Bean;
 import java.io.Serializable;
 
 public class Message implements Serializable {
-    //活动申请人
-    private User applicant;
-    //申请参与的活动
-    private Event wantJoin;
-    Message() {
 
+    //message ID
+    private int messageId;
+    //活动申请人的ID
+    private int applicantId;
+    //申请参与的活动的ID
+    private int wantJoinId;
+
+    public Message() {
     }
 
-    public Message(User applicant, Event wantJoin) {
-        this.applicant = applicant;
-        this.wantJoin = wantJoin;
+    public Message(int applicantId, int wantJoinId) {
+        this.messageId = messageId;
+        this.applicantId = applicantId;
+        this.wantJoinId = wantJoinId;
     }
 
-    public User getApplicant() {
-        return applicant;
+    public int getMessageId() {
+        return messageId;
     }
 
-    public void setApplicant(User applicant) {
-        this.applicant = applicant;
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 
-    public Event getWantJoin() {
-        return wantJoin;
+    public int getApplicantId() {
+        return applicantId;
     }
 
-    public void setWantJoin(Event wantJoin) {
-        this.wantJoin = wantJoin;
+    public void setApplicantId(int applicantId) {
+        this.applicantId = applicantId;
+    }
+
+    public int getWantJoinId() {
+        return wantJoinId;
+    }
+
+    public void setWantJoinId(int wantJoinId) {
+        this.wantJoinId = wantJoinId;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageId=" + messageId +
+                ", applicantId=" + applicantId +
+                ", wantJoinId=" + wantJoinId +
+                '}';
     }
 }

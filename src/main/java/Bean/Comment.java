@@ -2,43 +2,58 @@ package Bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 /*
     对商店的评论类
  */
 public class Comment implements Serializable {
+
     //用于区分评论的Id，可视情况修改为其他属性的组合
-    private String commentId;
-    //评论者
-    private User critic;
+    private int commentId;
+    //评论者ID
+    private int criticId;
     //评论内容
     private String content;
     //评分
     private double rank;
     //对评论的回复
     //暂不考虑对评论的回复
-    private ArrayList<String> replay;
+    private ArrayList<String> reply;
     //点赞数
     private int positive;
     //点踩数
     private int negative;
+    //商家id
+    private int merchantId;
 
-    public Comment(String content, double rank, int positive, int negative, User user) {
+    public Comment() {
+    }
+
+    public Comment(int commentId, int criticId, String content, double rank, ArrayList<String> reply, int positive, int negative, int merchantId) {
+        this.commentId = commentId;
+        this.criticId = criticId;
         this.content = content;
         this.rank = rank;
+        this.reply = reply;
         this.positive = positive;
         this.negative = negative;
-        critic = user;
+        this.merchantId = merchantId;
     }
 
-    public User getCritic() {
-        return critic;
+    public int getCommentId() {
+        return commentId;
     }
 
-    public Comment(String content, int rank, User user) {
-        this.content = content;
-        this.rank = rank;
-        critic = user;
-        positive = negative = 0;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+
+    public int getCriticId() {
+        return criticId;
+    }
+
+    public void setCriticId(int criticId) {
+        this.criticId = criticId;
     }
 
     public String getContent() {
@@ -57,6 +72,14 @@ public class Comment implements Serializable {
         this.rank = rank;
     }
 
+    public ArrayList<String> getReply() {
+        return reply;
+    }
+
+    public void setReply(ArrayList<String> reply) {
+        this.reply = reply;
+    }
+
     public int getPositive() {
         return positive;
     }
@@ -73,7 +96,25 @@ public class Comment implements Serializable {
         this.negative = negative;
     }
 
-    public String getCommentId() {
-        return commentId;
+    public int getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(int merchantId) {
+        this.merchantId = merchantId;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", criticId=" + criticId +
+                ", content='" + content + '\'' +
+                ", rank=" + rank +
+                ", reply=" + reply +
+                ", positive=" + positive +
+                ", negative=" + negative +
+                ", merchantId=" + merchantId +
+                '}';
     }
 }
