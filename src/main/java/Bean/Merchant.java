@@ -30,6 +30,10 @@ public class Merchant implements Serializable {
     private ArrayList<Integer> commentList;
 
     public Merchant() {
+        titleImage = null;
+        mainBusiness = new ArrayList<>();
+        commentList = new ArrayList<>();
+        imageList = new ArrayList<>();
     }
 
     public Merchant(int shopId, String shopName, ArrayList<Bitmap> imageList, String position, ArrayList<String> mainBusiness, String description, Bitmap titleImage, double rank, ArrayList<Integer> commentList) {

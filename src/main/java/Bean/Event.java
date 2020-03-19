@@ -36,6 +36,9 @@ public class Event implements Serializable {
     //通知、立即加入与广告相关不属于Event实体
 
     public Event() {
+        picture = null;
+        label = new ArrayList<>();
+        memberId = new ArrayList<>();
     }
 
     public Event(int eventID, String eventName, String position, Date time, String description, int founderId, ArrayList<String> label, Bitmap picture, int shopId, ArrayList<Integer> memberId) {
@@ -130,7 +133,14 @@ public class Event implements Serializable {
     public void setMemberId(ArrayList<Integer> memberId) {
         this.memberId = memberId;
     }
-
+    public boolean inLabel(String content) {
+        for (String str : label){
+            if (content.equals(str)){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return "Event{" +

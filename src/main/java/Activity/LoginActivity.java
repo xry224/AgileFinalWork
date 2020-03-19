@@ -1,8 +1,13 @@
 package Activity;
 
+import Bean.FileGetter;
+import DataBase.DataCenter;
+import DataBase.Invariant;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +15,29 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.agile.R;
 import Bean.User;
+import ServerLogic.LoginRelevantImpl;
+
+import java.util.Objects;
+
 public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Invariant.rootPath = Objects.requireNonNull(this.getExternalFilesDir("")).getAbsolutePath() + "/";
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Button login = findViewById(R.id.logInButton);
+        FileGetter.login();
+        /*Thread databaseconn = new Thread(runnable);
+        databaseconn.start();
+        try {
+            databaseconn.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace(System.out);
+        }*/
+        final Button loginBtn = findViewById(R.id.logInButton);
         //登录按钮监听器
-        login.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //获取输入内容，转为字符串
@@ -31,21 +51,22 @@ public class LoginActivity extends Activity {
                     Toast toast = Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    //startActivity(intent);
                 }
-                else if (!judgeUser(uname, pwd))
-                {
-                    Toast toast = Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT);
+                else {
+                    Toast toast = Toast.makeText(LoginActivity.this, "获取数据中，请稍候", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-                else
-                {
-                    User user = User.getUser(uname, pwd);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    parseData(intent, user);
-                    startActivity(intent);
+                    User user = LoginRelevantImpl.login(uname, pwd);
+                    if (user == null) {
+                        toast = Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+                    else {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        DataCenter.loginUser = user;
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -66,11 +87,30 @@ public class LoginActivity extends Activity {
             }
         });
     }
-    private void parseData(Intent intent, User user) {
-
-    }
-    public boolean judgeUser(String userName, String passwd) {
-
-        return true;
-    }
 }
+/*
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                String driver = "com.mysql.jdbc.Driver";
+                Class.forName(driver);
+                String url = "jdbc:mysql://172.19.240.244:3306/agile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false";
+                //String url="jdbc:mysql://127.0.0.1:3306/agile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8";
+                String username = "root";
+                String password = "123456Lsg.";
+                //String password = "19971031";
+                Connection conn = DriverManager.getConnection(url, username, password);
+                if (conn != null){
+                    DataBase.connection = conn;
+                    DataCenter.currentMainEventList = new getDataImpl().getEventList(DataCenter.expectedEventListSize);
+                    DataCenter.merchantList = new getDataImpl().getMerchantList(DataCenter.expectedMerchantListSize);
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace(System.out);
+            }
+        }
+    };
+ */

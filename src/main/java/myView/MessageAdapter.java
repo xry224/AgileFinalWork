@@ -1,4 +1,8 @@
 package myView;
+import Bean.Message;
+import DataBase.DataCenter;
+import ServerLogic.EventRelevantImpl;
+import ServerLogic.getDataImpl;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,6 +12,8 @@ import android.widget.Button;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.example.agile.R;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +48,12 @@ public class MessageAdapter extends SimpleAdapter {
         }
         Button accept = convertView.findViewById(R.id.accept);
         Button reject = convertView.findViewById(R.id.reject);
+        final ArrayList<Message> messages = new getDataImpl().getMessage(DataCenter.loginUser.getMessageBox());
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Message message = messages.get(index);
+                EventRelevantImpl.handleMessage(message, DataCenter.loginUser, true);
                 Toast toast = Toast.makeText(context, index + " accept!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -53,6 +62,8 @@ public class MessageAdapter extends SimpleAdapter {
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Message message = messages.get(index);
+                EventRelevantImpl.handleMessage(message, DataCenter.loginUser, false);
                 Toast toast = Toast.makeText(context, index + " reject!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();

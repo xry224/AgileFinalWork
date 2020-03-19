@@ -1,7 +1,6 @@
 package Bean;
 
 import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -42,8 +41,14 @@ public class User implements Serializable {
     //private ArrayList<Event> needNotification;
 
     public User() {
+        this.userIcon = null;
+        eventList = new ArrayList<>();
+        comments = new ArrayList<>();
+        historyEvent = new ArrayList<>();
+        messageBox = new ArrayList<>();
     }
 
+    
     public User(int id, String userName, String userID, String realName, int rankScore, boolean hasAuthentication, String email, String phoneNumber, Bitmap userIcon, ArrayList<Integer> eventList, ArrayList<Integer> comments, ArrayList<Integer> historyEvent, ArrayList<Integer> messageBox) {
         this.id = id;
         this.userName = userName;

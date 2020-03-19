@@ -32,19 +32,16 @@
                           android:textSize="25sp"
                           android:layout_marginTop="10dp"
                           android:id="@+id/eventTitle"
-                          android:text="健身房流汗！"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
                           android:textSize="15sp"
                           android:layout_marginTop="10dp"
                           android:id="@+id/eventTime"
-                          android:text="时间：2020.11.12 19:00"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
                           android:textSize="15sp"
                           android:layout_marginTop="10dp"
                           android:id="@+id/eventPosition"
-                          android:text="地点：南京大学体育馆"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
@@ -55,14 +52,12 @@
                   android:layout_marginTop="5dp"
                   android:textSize="15sp"
                   android:id="@+id/eventDes"
-                  android:text="注意事项：请大家爱惜器材，注意安全！"
                   android:layout_height="200px"/>
         <TextView android:layout_height="wrap_content"
                   android:id="@+id/founder"
                   android:layout_marginTop="2dp"
                   android:textSize="15sp"
                   android:layout_gravity="end"
-                  android:text="发起人：许昌舜"
                   android:layout_width="wrap_content"/>
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
@@ -102,6 +97,19 @@
                                     android:id="@+id/userIcon2"
                                     android:src="@drawable/gym"
                                     android:layout_height="120px"/>
+            <myView.CircleImageView android:layout_width="120px"
+                                    android:layout_marginStart="5dp"
+                                    android:id="@+id/userIcon3"
+                                    android:src="@drawable/gym"
+                                    android:layout_height="120px"/>
+            <myView.CircleImageView android:layout_width="120px"
+                                    android:layout_marginStart="5dp"
+                                    android:id="@+id/userIcon4"
+                                    android:layout_height="120px"/>
+            <myView.CircleImageView android:layout_width="120px"
+                                    android:layout_marginStart="5dp"
+                                    android:id="@+id/userIcon5"
+                                    android:layout_height="120px"/>
             <myView.CircleImageView android:layout_height="120px"
                                     android:id="@+id/inviteMember"
                                     android:src="@drawable/invite"
@@ -122,6 +130,7 @@
                   android:layout_height="40sp">
         <Button android:layout_width="wrap_content"
                 android:layout_gravity="center"
+                android:id="@+id/applyEvent"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/shape"
                 android:text="立即加入"

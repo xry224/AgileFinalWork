@@ -1,9 +1,15 @@
 package Activity;
 
+import Bean.User;
+import DataBase.DataCenter;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
@@ -13,8 +19,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class myAccount extends Activity {
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_page);
         InitListener();
@@ -22,6 +31,15 @@ public class myAccount extends Activity {
         ListView listView = findViewById(R.id.setList);
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
         InitSetListItem(itemList);
+        ImageView userIcon = findViewById(R.id.userImage);
+        TextView uName = findViewById(R.id.userNameText);
+        TextView realName = findViewById(R.id.realName);
+        TextView credit = findViewById(R.id.useScore);
+        userIcon.setImageBitmap(processUserIcon(DataCenter.loginUser));
+        uName.setText(DataCenter.loginUser.getUserName());
+        realName.setText("实名: " + DataCenter.loginUser.getRealName());
+        credit.setText("信用积分: " + DataCenter.loginUser.getRankScore());
+        setRankDes(DataCenter.loginUser.getRankScore());
         //绑定adapter
         String[] key = new String[] {"itemImage", "itemText"};
         int[] value = new int[] {R.id.setListItemImage, R.id.setListItemText};
@@ -36,6 +54,25 @@ public class myAccount extends Activity {
             }
         });
     }
+    private void setRankDes(int rank) {
+        TextView rankDes = findViewById(R.id.rankDes);
+        if (rank > 85){
+            rankDes.setText(R.string.ExcellentCredit);
+        }
+        else if (rank > 75){
+            rankDes.setText(R.string.GoodCredit);
+        }
+        else if (rank > 60){
+            rankDes.setText(R.string.NormalCredit);
+        }
+        else if (rank > 50){
+            rankDes.setText(R.string.notGoodCredit);
+        }
+        else{
+            rankDes.setText(R.string.BadCredit);
+        }
+    }
+
     /*
      * @Description 初始化设置列表项
      */
@@ -51,6 +88,12 @@ public class myAccount extends Activity {
             map.put("itemText", listText[i]);
             itemList.add(map);
         }
+    }
+    private Bitmap processUserIcon(User user) {
+        if (user.getUserIcon() == null){
+            return BitmapFactory.decodeResource(getResources(), R.drawable.gym);
+        }
+        return user.getUserIcon();
     }
     private void InitListener() {
         //底部导航栏

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">agile</string>
-    <string name="defaultLocation">北京</string>
+    <string name="defaultLocation">南京</string>
     <string name="searchDes">搜索按钮</string>
     <string name="messageDes">消息按钮</string>
     <string name="searchButtonStr">搜索</string>
@@ -30,7 +30,11 @@
     <string name="forgetpw">忘记密码</string>
     <string name="loginCHN">登录</string>
     <string name="score">信用积分: 100</string>
-    <string name="goodCredit">信用良好，请继续保持</string>
+    <string name="ExcellentCredit">信用良好，请继续保持</string>
+    <string name="GoodCredit">信用较好，请继续保持</string>
+    <string name="NormalCredit">信用一般，请努力提高</string>
+    <string name="notGoodCredit">信用较差，请努力提高</string>
+    <string name="BadCredit">请提高信用，否则将注销帐号</string>
     <string name="register">注册</string>
     <string name="registHint1">邮箱</string>
     <string name="registerHint2">用户名</string>
@@ -42,4 +46,7 @@
     <string name="accept">接受</string>
     <string name="reject">拒绝</string>
     <string name="verifyCode">发送验证码</string>
+    <string name="newEventDes">备注与活动说明</string>
+    <string name="addLabel">添加标签</string>
+    <string name="releaseEvent">发布活动</string>
 </resources>

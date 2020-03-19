@@ -2,13 +2,18 @@ package Activity;
 
 import Bean.Comment;
 import Bean.Merchant;
+import DataBase.DataCenter;
+import ServerLogic.MerchantRelevantImpl;
+import ServerLogic.getDataImpl;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.StrictMode;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.example.agile.R;
 import myView.CommentAdapter;
 import java.util.ArrayList;
@@ -18,6 +23,8 @@ public class MerchantDetail extends Activity {
     private Merchant merchant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_detail);
         merchant = (Merchant)getIntent().getSerializableExtra("shopInfo");
@@ -28,26 +35,33 @@ public class MerchantDetail extends Activity {
         String description = merchant.getDescription();
         String position = "地点: " + merchant.getPosition();
         ArrayList<String> mainBusiness = merchant.getMainBusiness();
-        ArrayList<Comment> comments = merchant.getCommentList();
-        String business = "主营业务: ";
+        ArrayList<Comment> comments = new getDataImpl().getComment(merchant.getCommentList());
+        Bitmap shopicon = merchant.getTitleImage();
+        ArrayList<Bitmap> shopImageList = merchant.getImageList();
+        StringBuilder business = new StringBuilder("主营业务: ");
         for (int i = 0; i < mainBusiness.size(); ++i) {
-            business += mainBusiness.get(i);
+            business.append(mainBusiness.get(i));
             if (i != mainBusiness.size()-1) {
-                business += "、";
+                business.append("、");
             }
         }
 
+        ImageView imageView = findViewById(R.id.shopIcon);
         TextView title = findViewById(R.id.shopTitle);
         TextView des = findViewById(R.id.shopDescription);
         TextView location = findViewById(R.id.shopLoc);
         TextView bus = findViewById(R.id.mainBusiness);
+        ImageView desImage1 = findViewById(R.id.shopDesImage1);
+        ImageView desImage2 = findViewById(R.id.shopDesImage2);
 
+        setShopDesImage(shopImageList, desImage1, desImage2);
+        imageView.setImageBitmap(shopicon);
         des.setText(description);
         title.setText(shopName);
         location.setText(position);
-        bus.setText(business);
+        bus.setText(business.toString());
 
-        showComment(comments, 5);
+        showComment(comments, comments.size());
 
         Button newComment = findViewById(R.id.newComment);
         newComment.setOnClickListener(new View.OnClickListener() {
@@ -57,22 +71,58 @@ public class MerchantDetail extends Activity {
             }
         });
     }
+
+    private void setShopDesImage(ArrayList<Bitmap> list, ImageView imageView1, ImageView imageView2){
+        if (list.size()<2){
+            imageView1.setImageBitmap(list.get(0));
+            imageView2.setImageBitmap(list.get(0));
+        }
+        else{
+            imageView1.setImageBitmap(list.get(0));
+            imageView2.setImageBitmap(list.get(1));
+        }
+    }
+
     private void newCommentDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MerchantDetail.this);
         final AlertDialog alertDialog = builder.create();
-        View dialogView = View.inflate(MerchantDetail.this, R.layout.new_comment, null);
+        final View dialogView = View.inflate(MerchantDetail.this, R.layout.new_comment, null);
         alertDialog.setView(dialogView);
         alertDialog.show();
 
         Button publish = dialogView.findViewById(R.id.publishComment);
-        Button cancel = dialogView.findViewById(R.id.cancelComment);
+        final Button cancel = dialogView.findViewById(R.id.cancelComment);
         publish.setText("发表");
         cancel.setText("取消");
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //todo: about new comment
-                alertDialog.dismiss();
+                RatingBar ratingBar = dialogView.findViewById(R.id.criticRank);
+                EditText content = dialogView.findViewById(R.id.newCommentContent);
+                double rank = ratingBar.getRating();
+                String comment = content.getText().toString();
+                Comment newComment = new Comment();
+
+                newComment.setContent(comment);
+                newComment.setCriticId(DataCenter.loginUser.getId());
+                newComment.setMerchantId(merchant.getShopId());
+                newComment.setNegative(0);
+                newComment.setPositive(0);
+                newComment.setRank(rank);
+                MerchantRelevantImpl.evaluateMerchant(newComment, merchant);
+
+                Toast toast = Toast.makeText(MerchantDetail.this, "评论成功！", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                //延迟后转到登录页面
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog.dismiss();
+                    }
+                }, 1500);//1.5秒后执行Runnable中的run方法
             }
         });
 
@@ -90,7 +140,7 @@ public class MerchantDetail extends Activity {
         double[] ranks = new double[length];
         for (int i = 0; i < length; ++i) {
             Comment comment = commentList.get(i);
-            String critic = comment.getCritic().getUserName();
+            String critic = new getDataImpl().getUser(comment.getCriticId()).getUserName();
             String content = comment.getContent();
             int positive = comment.getPositive();
             int negative = comment.getNegative();
@@ -110,10 +160,4 @@ public class MerchantDetail extends Activity {
         listView.setAdapter(adapter);
     }
 
-    public void setMerchant(Merchant merchant) {
-        this.merchant = merchant;
-    }
-    public Merchant getMerchant() {
-        return merchant;
-    }
 }

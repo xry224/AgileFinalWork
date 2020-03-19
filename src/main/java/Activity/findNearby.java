@@ -1,14 +1,16 @@
 package Activity;
 
+import DataBase.DataCenter;
+import ServerLogic.MerchantRelevantImpl;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.RadioGroup;
+import android.widget.*;
 import com.example.agile.R;
+import myView.MyViewBinder;
 import myView.RatingBarAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,10 +19,12 @@ import Bean.Merchant;
 public class findNearby extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_near);
         InitListener();
-        initMerchantList(MainActivity.getTotalMerchantList(), 6);
+        initMerchantList(DataCenter.merchantList, 6);
         initListListener();
     }
     private void initListListener() {
@@ -28,13 +32,43 @@ public class findNearby extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Merchant merchant = MainActivity.getTotalMerchantList().get(position);
+                Merchant merchant = DataCenter.merchantList.get(position);
                 Intent intent = new Intent(findNearby.this, MerchantDetail.class);
                 intent.putExtra("shopInfo", merchant);
                 startActivity(intent);
             }
         });
+        ImageButton message = findViewById(R.id.messageInFind);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(findNearby.this, MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton searchMer = findViewById(R.id.searchFindButton);
+        searchMer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText content = findViewById(R.id.findSearch);
+                String searchContent = content.getText().toString();
+                ArrayList<Merchant> filteredList = MerchantRelevantImpl.searchMerchant(searchContent, 10);
+                initMerchantList(filteredList, filteredList.size());
+            }
+        });
     }
+
+    private ArrayList<Merchant> FilterMerchant(ArrayList<Merchant> list, String filter){
+        ArrayList<Merchant> merchants = new ArrayList<>();
+        for (Merchant merchant : list){
+            if (merchant.getShopName().contains(filter)){
+                merchants.add(merchant);
+            }
+        }
+        return merchants;
+    }
+
+
     private void initMerchantList(ArrayList<Merchant> shopList, int targetSize) {
         ListView listView = findViewById(R.id.findNearListView);
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
@@ -46,28 +80,40 @@ public class findNearby extends Activity {
             String name = merchant.getShopName();
             String position = "地点: " + merchant.getPosition();
             String des = merchant.getDescription();
+            ArrayList<Bitmap> bitmaps = merchant.getImageList();
             //图片相关的处理
             HashMap<String, Object> hashMap = new HashMap<>();
             //hashMap.put("rank", rank);
-            ranks[i] = rank;
+            processImage(bitmaps, hashMap);
+            ranks[i] = rank == -1 ? 0 : rank;
             hashMap.put("shopName", name);
             hashMap.put("Position", position);
             hashMap.put("description", des);
             itemList.add(hashMap);
         }
-        String[] key = new String[]{"shopName", "Position", "description"};
-        int[] value = new int[]{R.id.ShopTitle, R.id.shopPosition, R.id.shopDes};
+        String[] key = new String[]{"shopName", "Position", "description", "shopImage1", "shopImage2", "shopImage3"};
+        int[] value = new int[]{R.id.ShopTitle, R.id.shopPosition, R.id.shopDes, R.id.shopImage1, R.id.shopImage2, R.id.shopImage3};
         RatingBarAdapter adapter = new  RatingBarAdapter(this, itemList, R.layout.shop_list_item, key, value, ranks);
+        adapter.setViewBinder(new MyViewBinder());
         listView.setAdapter(adapter);
     }
+
+    private void processImage(ArrayList<Bitmap> bitmaps, HashMap<String, Object> hashMap){
+        int length = Math.min(bitmaps.size(), 3);
+        String id = "shopImage";
+        for (int i = 1; i <= length; ++i){
+            String curID = id + i;
+            hashMap.put(curID, bitmaps.get(i));
+        }
+    }
+
     private void InitListener() {
         //底部导航栏
         RadioGroup navigate = findViewById(R.id.navigateGroup);
         navigate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(findNearby.this);
-                Intent intent = null;
+                Intent intent;
                 //直接使用setContentView(int viewID)会使所有view失效
                 switch (checkedId){
                     case R.id.homePageButton:
