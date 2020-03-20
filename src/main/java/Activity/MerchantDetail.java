@@ -28,7 +28,7 @@ public class MerchantDetail extends Activity {
         StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_detail);
-        merchant = (Merchant)getIntent().getSerializableExtra("shopInfo");
+        merchant = DataCenter.selectedMerchant;
         Init();
     }
     private void Init() {

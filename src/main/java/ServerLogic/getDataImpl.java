@@ -33,6 +33,7 @@ public class getDataImpl {
         picMap.put("gym.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.gym));
         picMap.put("yumaoqiu.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.yumaoqiu));
         picMap.put("inside.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.inside));
+        picMap.put("sanguo.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.sanguo));
     }
     public static Bitmap DrawableToBitmap(Drawable drawable) {
         // 获取 drawable 长宽
@@ -130,6 +131,7 @@ public class getDataImpl {
         PreparedStatement stmt = null;
         try {
             conn = db.getConnection();
+            //其参与的活动
             String sql = "select eventId from user_and_event where userId=?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, user_id);
@@ -137,6 +139,8 @@ public class getDataImpl {
             while (rs.next()) {
                 historyEvents.add(rs.getInt(1));
             }
+            //其创建的活动
+            historyEvents.addAll(getFounderEvents(user_id));
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace(System.out);;

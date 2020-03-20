@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class historyList extends Activity {
+    private ArrayList<Event> currentShownList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -27,8 +28,8 @@ public class historyList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
         InitListener();
-        ArrayList<Event> allEvent = new getDataImpl().getEvent(DataCenter.loginUser.getHistoryEvent()) ;
-        initList(allEvent, allEvent.size());
+        currentShownList = new getDataImpl().getEvent(DataCenter.loginUser.getHistoryEvent()) ;
+        initList(currentShownList, currentShownList.size());
     }
     private void initList(ArrayList<Event> historyList, int targetSize) {
         ListView listView = findViewById(R.id.HistoryListView);
@@ -109,10 +110,7 @@ public class historyList extends Activity {
             public void onClick(View v) {
                 EditText content = findViewById(R.id.historySearch);
                 String searchContent = content.getText().toString();
-                ArrayList<Event> filteredList = EventRelevantImpl.searchEvent(searchContent, 10);
-                if (filteredList == null){
-                   filteredList = new ArrayList<>();
-                }
+                ArrayList<Event> filteredList = FilterEvent(currentShownList, searchContent);
                 initList(filteredList, filteredList.size());
             }
         });
@@ -126,15 +124,15 @@ public class historyList extends Activity {
         allEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Event> allEvent = new getDataImpl().getEvent(DataCenter.loginUser.getHistoryEvent());
-                initList(allEvent, allEvent.size());
+                currentShownList = new getDataImpl().getEvent(DataCenter.loginUser.getHistoryEvent());
+                initList(currentShownList, currentShownList.size());
             }
         });
         myHoldEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Event> allEvent = new getDataImpl().getEvent(DataCenter.loginUser.getEventList());
-                initList(allEvent, allEvent.size());
+                currentShownList = new getDataImpl().getEvent(DataCenter.loginUser.getEventList());
+                initList(currentShownList, currentShownList.size());
             }
         });
     }// end of initListener

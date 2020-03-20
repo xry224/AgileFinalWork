@@ -53,13 +53,9 @@ public class EventRelevantImpl {
      * @description 根据搜索条件搜索活动
      */
     public static ArrayList<Event> searchEvent(String condition, int size) {
-        ArrayList<Event> eventResult1 = searchEventByLabel(condition, size);
-        if (eventResult1 != null)
-            return eventResult1;
-        ArrayList<Event> eventResult2 = searchEventByName(condition, size);
-        if (eventResult2 != null)
-            return eventResult2;
-        return null;
+        ArrayList<Event> result = new ArrayList<>(searchEventByLabel(condition, size));
+        result.addAll(searchEventByName(condition, size));
+        return result;
     }
 
     /**

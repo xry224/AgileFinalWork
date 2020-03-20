@@ -89,18 +89,15 @@
             <myView.CircleImageView android:layout_width="120px"
                                     android:layout_marginStart="5dp"
                                     android:id="@+id/userIcon1"
-                                    android:src="@drawable/gym"
                                     android:layout_height="120px"/>
 
             <myView.CircleImageView android:layout_width="120px"
                                     android:layout_marginStart="5dp"
                                     android:id="@+id/userIcon2"
-                                    android:src="@drawable/gym"
                                     android:layout_height="120px"/>
             <myView.CircleImageView android:layout_width="120px"
                                     android:layout_marginStart="5dp"
                                     android:id="@+id/userIcon3"
-                                    android:src="@drawable/gym"
                                     android:layout_height="120px"/>
             <myView.CircleImageView android:layout_width="120px"
                                     android:layout_marginStart="5dp"
@@ -124,7 +121,7 @@
                android:src="@drawable/gym"
                android:layout_height="150dp"/>
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_marginTop="15dp"
+                  android:layout_marginTop="10dp"
                   android:orientation="vertical"
                   android:background="@color/gold"
                   android:layout_height="40sp">

@@ -27,7 +27,7 @@ public class EventDetail extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_detail);
-        event = (Event)getIntent().getSerializableExtra("eventInfo");
+        event = DataCenter.selectedEvent;
         init();
     }
     @SuppressLint("SetTextI18n")

@@ -85,9 +85,8 @@ public class MainActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Event selected = shownList.get(position);
+                DataCenter.selectedEvent = shownList.get(position);
                 Intent intent = new Intent(MainActivity.this, EventDetail.class);
-                intent.putExtra("eventInfo", selected);
                 startActivity(intent);
             }
         });
@@ -98,10 +97,12 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 EditText content = findViewById(R.id.mainSearch);
                 String searchContent = content.getText().toString();
-                shownList = EventRelevantImpl.searchEvent(searchContent, 10);
-                if (shownList == null){
-                    shownList = new ArrayList<>();
+                if (searchContent.equals("")){
+                    shownList = DataCenter.currentMainEventList;
+                    showEventCardByListView(shownList, shownList.size());
+                    return;
                 }
+                shownList = EventRelevantImpl.searchEvent(searchContent, 10);
                 showEventCardByListView(shownList, 5);
             }
         });
@@ -136,77 +137,78 @@ public class MainActivity extends Activity {
         switch (id){
             case R.id.footballButton:
             {
-                shownList = EventRelevantImpl.searchEventByLabel(filter[0], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[0], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.basketballButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[1]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[1], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[1], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.chessButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[2]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[2], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[2], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.exerciseButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[3]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[3], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[3], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.pokerButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[4]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[4], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[4], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.runButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[5]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[5], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[5], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.sanguoButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[6]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[6], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[6], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.swimButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[7]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[7], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[7], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.volleyButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[8]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[8], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[8], 10);
+                shownList.addAll(EventRelevantImpl.searchEvent("排球", 10));
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.tabletennisButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[9]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[9], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[9], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }
             case R.id.tennisButton:
             {
                 //shownList = searchQualifiedEvent(DataCenter.currentMainEventList, filter[10]);
-                shownList = EventRelevantImpl.searchEventByLabel(filter[10], 10);
+                shownList = EventRelevantImpl.searchEvent(filter[10], 10);
                 showEventCardByListView(shownList, 8);
                 break;
             }

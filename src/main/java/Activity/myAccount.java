@@ -64,6 +64,12 @@ public class myAccount extends Activity {
                         builder.setMessage(content);
                         break;
                     }
+                    case 2:
+                    {
+                        DataCenter.loginUser = null;
+                        Intent intent = new Intent(myAccount.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                 }
                 builder.show();
             }

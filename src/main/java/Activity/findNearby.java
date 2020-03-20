@@ -32,9 +32,8 @@ public class findNearby extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Merchant merchant = DataCenter.merchantList.get(position);
+                DataCenter.selectedMerchant = DataCenter.merchantList.get(position);
                 Intent intent = new Intent(findNearby.this, MerchantDetail.class);
-                intent.putExtra("shopInfo", merchant);
                 startActivity(intent);
             }
         });
