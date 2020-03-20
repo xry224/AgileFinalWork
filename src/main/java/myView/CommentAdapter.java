@@ -1,19 +1,25 @@
 package myView;
 
+import Activity.MerchantDetail;
+import Bean.Comment;
+import Bean.Merchant;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import com.example.agile.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class CommentAdapter extends SimpleAdapter {
     private LayoutInflater mInflater;
-    private double[] ranks;
+    private ArrayList<Comment> commentList;
     /**
      * Constructor
      *
@@ -31,16 +37,33 @@ public class CommentAdapter extends SimpleAdapter {
     public CommentAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, double[] rank) {
         super(context, data, resource, from, to);
         mInflater = LayoutInflater.from(context);
-        ranks = rank;
+        //ranks = rank;
+    }
+    public CommentAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, double[] rank, ArrayList<Comment> comments) {
+        super(context, data, resource, from, to);
+        mInflater = LayoutInflater.from(context);
+        //ranks = rank;
+        commentList = comments;
+    }
+    public CommentAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, ArrayList<Comment> comments) {
+        super(context, data, resource, from, to);
+        mInflater = LayoutInflater.from(context);
+        commentList = comments;
     }
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.comment_list_item, parent, false);
         }
+        final Comment comment = commentList.get(position);
+
+        TextView positiveRank = convertView.findViewById(R.id.positiveRank);
+        TextView negativeView = convertView.findViewById(R.id.negativeRank);
+        positiveRank.setText(comment.getPositive());
+        negativeView.setText(comment.getNegative());
+        //set rank of rating bar;
         RatingBar ratingBar = convertView.findViewById(R.id.userRank);
-        double rank = ranks[position];
-        ratingBar.setRating((float) rank);
+        ratingBar.setRating((float) comment.getRank());
         return super.getView(position, convertView, parent);
     }
 }

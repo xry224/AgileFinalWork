@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import com.example.agile.R;
@@ -70,6 +71,7 @@ public class MerchantDetail extends Activity {
                 newCommentDialog();
             }
         });
+
     }
 
     private void setShopDesImage(ArrayList<Bitmap> list, ImageView imageView1, ImageView imageView2){
@@ -133,31 +135,53 @@ public class MerchantDetail extends Activity {
             }
         });
     }
-    private void showComment(ArrayList<Comment> commentList, int Size) {
+    private void showComment(final ArrayList<Comment> commentList, int Size) {
         int length = Math.min(Size, commentList.size());
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
         ListView listView = findViewById(R.id.commentList);
-        double[] ranks = new double[length];
         for (int i = 0; i < length; ++i) {
             Comment comment = commentList.get(i);
             String critic = new getDataImpl().getUser(comment.getCriticId()).getUserName();
             String content = comment.getContent();
             int positive = comment.getPositive();
             int negative = comment.getNegative();
-            double rank = comment.getRank();
 
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("commenter", critic);
             hashMap.put("content", content);
             hashMap.put("support",positive);
             hashMap.put("oppose",negative);
-            ranks[i] = rank;
             itemList.add(hashMap);
         }
         String[] key = new String[]{"commenter", "content", "support", "oppose"};
         int[] value = new int[]{R.id.critic, R.id.commentContent, R.id.positiveRank, R.id.negativeRank};
-        CommentAdapter adapter = new CommentAdapter(this,itemList, R.layout.comment_list_item,key, value, ranks);
+        CommentAdapter adapter = new CommentAdapter(this,itemList, R.layout.comment_list_item,key, value, commentList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (view.getId()){
+                    case R.id.positive:
+                    {
+                        Comment comment = commentList.get(position);
+                        comment.setPositive(comment.getPositive() + 1);
+                        showComment(commentList, commentList.size());
+                        break;
+                    }
+                    case R.id.negative:
+                    {
+                        Comment comment = commentList.get(position);
+                        comment.setNegative(comment.getNegative() + 1);
+                        showComment(commentList, commentList.size());
+                        break;
+                    }
+                    default:
+                        {
+                        break;
+                    }
+                }
+            }
+        });
     }
 
 }
