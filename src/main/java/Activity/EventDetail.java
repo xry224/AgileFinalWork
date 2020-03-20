@@ -1,6 +1,7 @@
 package Activity;
 
 import Bean.Event;
+import Bean.Message;
 import Bean.User;
 import DataBase.DataCenter;
 import ServerLogic.EventRelevantImpl;
@@ -84,7 +85,28 @@ public class EventDetail extends Activity {
             apply.setText("立即加入");
             apply.setClickable(true);
         }
+        //检查用户是否已经申请了该活动
+        if (isApplicant(DataCenter.loginUser, event)){
+            apply.setText("已申请");
+            apply.setClickable(false);
+        }
+        else{
+            apply.setText("立即加入");
+            apply.setClickable(true);
+        }
     }
+
+    private boolean isApplicant(User user, Event event){
+        User founder = new getDataImpl().getUser(event.getFounderId());
+        ArrayList<Message> messages = new getDataImpl().getMessage(founder.getMessageBox());
+        for (Message message : messages){
+            if (message.getApplicantId() == user.getId() && message.getWantJoinId() == event.getEventID()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isMember(User user, Event event){
         for (Integer integer : event.getMemberId()){
             if (user.getId() == integer){

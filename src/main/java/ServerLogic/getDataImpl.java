@@ -187,7 +187,7 @@ public class getDataImpl {
                 user.setEventList(getFounderEvents(id));
                 user.setComments(getUserComments(id));
                 user.setHistoryEvent(getHistoryEvent(id));
-                user.setMessageBox(new ArrayList<Integer>());
+                user.setMessageBox(getMessageForUser(id));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -499,7 +499,31 @@ public class getDataImpl {
         }
         return merchantList;
     }
-    public Message getMessage(int messageId) {
+
+    private ArrayList<Integer> getMessageForUser(int userID){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ArrayList<Integer> result = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            String sql = "select id from message where wantJoin in (select event_id from event where founderId=?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int messageID = rs.getInt(1);
+                result.add(messageID);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);;
+        } finally {
+            db.closeConnection(stmt, conn);
+        }
+        return result;
+    }
+
+    private Message getMessage(int messageId) {
         Message message = null;
         Connection conn = null;
         PreparedStatement stmt = null;

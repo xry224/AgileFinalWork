@@ -25,10 +25,10 @@ public class MerchantRelevantImpl {
         PreparedStatement stmt = null;
         try {
             conn = db.getConnection();
-            String sql = "select shop_id from merchant where shop_name=? or position=?";
+            String sql = "select shop_id from merchant where shop_name like ? or position like ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, condition);
-            stmt.setString(2, condition);
+            stmt.setString(1, "%" + condition + "%");
+            stmt.setString(2, "%" + condition + "%");
             ResultSet rs = stmt.executeQuery();
             int count = 0;
             while (rs.next()) {
