@@ -3,6 +3,7 @@ package myView;
 import Activity.MerchantDetail;
 import Bean.Comment;
 import Bean.Merchant;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,7 @@ public class CommentAdapter extends SimpleAdapter {
         mInflater = LayoutInflater.from(context);
         commentList = comments;
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
         if (convertView == null) {
@@ -59,8 +61,8 @@ public class CommentAdapter extends SimpleAdapter {
 
         TextView positiveRank = convertView.findViewById(R.id.positiveRank);
         TextView negativeView = convertView.findViewById(R.id.negativeRank);
-        positiveRank.setText(comment.getPositive());
-        negativeView.setText(comment.getNegative());
+        positiveRank.setText(Integer.toString(comment.getPositive()));
+        negativeView.setText(Integer.toString(comment.getNegative()));
         //set rank of rating bar;
         RatingBar ratingBar = convertView.findViewById(R.id.userRank);
         ratingBar.setRating((float) comment.getRank());
