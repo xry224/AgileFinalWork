@@ -1,4 +1,4 @@
-package Bean;
+package Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +24,7 @@ public class FileGetter {
     }
 
     public static File copyFile(Connection conn, String fileName, String localPath) {
+        assert conn!= null && fileName !=null && localPath!=null;
         // filename: /home/agile/gym.jpg
         // localPath: F:/
         SCPClient sc = new SCPClient(conn);

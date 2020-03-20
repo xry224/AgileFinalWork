@@ -103,7 +103,7 @@ public class findNearby extends Activity {
         String id = "shopImage";
         for (int i = 1; i <= length; ++i){
             String curID = id + i;
-            hashMap.put(curID, bitmaps.get(i));
+            hashMap.put(curID, bitmaps.get(i - 1));
         }
     }
 

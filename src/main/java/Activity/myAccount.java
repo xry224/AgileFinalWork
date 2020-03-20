@@ -48,9 +48,24 @@ public class myAccount extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast toast = Toast.makeText(myAccount.this, "行id: "+ id+", position: " + position, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(myAccount.this);
+                switch (position){
+                    case 0:{
+                        builder.setTitle("实名认证情况");
+                        String content = DataCenter.loginUser.isHasAuthentication() ? "已实名"  : "未实名";
+                        builder.setMessage(content);
+                        break;
+                    }
+                    case 3:{
+                        builder.setTitle("关于我们");
+                        String content = "敏捷开发大作业\n" +
+                                         "MF1932208 徐戎越\n" + "MF1932209 徐世诚\n" +
+                                         "MF1932118 刘少国\n" + "MF1932212 许昌舜";
+                        builder.setMessage(content);
+                        break;
+                    }
+                }
+                builder.show();
             }
         });
     }

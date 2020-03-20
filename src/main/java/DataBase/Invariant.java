@@ -1,5 +1,5 @@
 package DataBase;
 
 public class Invariant {
-    public static String rootPath = null;
+    public static String rootPath;
 }

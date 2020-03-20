@@ -1,7 +1,8 @@
 package ServerLogic;
 
 import Bean.*;
-import Bean.FileGetter;
+import Util.FileGetter;
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import java.io.File;
@@ -12,13 +13,45 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+
 import DataBase.Invariant;
 import DataBase.DataBase;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
+import com.example.agile.R;
 
 public class getDataImpl {
 
     private DataBase db = new DataBase();
+
+    private static HashMap<String, Bitmap> picMap = new HashMap<>();
+
+    public static void initPicMap(Context context) {
+        picMap.put("gym.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.gym));
+        picMap.put("yumaoqiu.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.yumaoqiu));
+        picMap.put("inside.jpg", BitmapFactory.decodeResource(context.getResources(), R.drawable.inside));
+    }
+    public static Bitmap DrawableToBitmap(Drawable drawable) {
+        // 获取 drawable 长宽
+        int width = drawable.getIntrinsicWidth();
+        int heigh = drawable.getIntrinsicHeight();
+
+        drawable.setBounds(0, 0, width, heigh);
+
+        // 获取drawable的颜色格式
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                : Bitmap.Config.RGB_565;
+        // 创建bitmap
+        Bitmap bitmap = Bitmap.createBitmap(width, heigh, config);
+        // 创建bitmap画布
+        Canvas canvas = new Canvas(bitmap);
+        // 将drawable 内容画到画布中
+        drawable.draw(canvas);
+        return bitmap;
+    }
     private ArrayList<Bitmap> getBitMaps(String path){
         if (path == null || path.equals("")){
             return null;
@@ -34,7 +67,17 @@ public class getDataImpl {
         if (path == null || path.equals("")){
             return null;
         }
+        String[] result = path.split("/");
+        String localFilename = Invariant.rootPath + result[result.length-1];
+        Bitmap bitmap = picMap.get(result[result.length-1]);
+        if (bitmap != null) {
+            //System.out.println(result[result.length-1]);
+            return bitmap;
+        }
+        FileGetter.login();
         File f = FileGetter.copyFile(FileGetter.conn, path, Invariant.rootPath);
+        FileGetter.conn.close();
+        //System.out.println(f.getAbsolutePath());
         return BitmapFactory.decodeFile(f.getAbsolutePath());
     }
     private ArrayList<Integer> getFounderEvents(int user_id) {
@@ -277,16 +320,18 @@ public class getDataImpl {
                 String label = rs.getString(6);
                 String image = rs.getString(7);
                 int merchantId = rs.getInt(8);
-                String[] result = label.split("、");
                 event = new Event();
+                if (label != null) {
+                    String[] result = label.split(",");
+                    ArrayList<String> labels = new ArrayList<>(Arrays.asList(result));
+                    event.setLabel(labels);
+                }
                 event.setEventID(eventId);
                 event.setEventName(eventName);
                 event.setPosition(position);
                 event.setTime(time);
                 event.setDescription(description);
                 event.setFounderId(founderId);
-                ArrayList<String> labels = new ArrayList<>(Arrays.asList(result));
-                event.setLabel(labels);
                 event.setPicture(getBitmap(image));
                 event.setShopId(merchantId);
                 event.setMemberId(getMembers(eventId));
@@ -299,7 +344,59 @@ public class getDataImpl {
         }
         return event;
     }
+    /**
+     * @description  获取size大小的EventList
+     * @param size   size的大小
+     * @return java.util.ArrayList<Bean.Event>
+     */
+    public ArrayList<Event> getEventList(int size) {
+        ArrayList<Event> eventList = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = db.getConnection();
+            String sql = "select event_id,event_name,position,time,description,founderId,label,picture,merchantId from event";
+            stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int eventId = rs.getInt(1);
+                String eventName = rs.getString(2);
+                String position = rs.getString(3);
+                Date time = rs.getDate(4);
+                String description = rs.getString(5);
+                int founderId = rs.getInt(6);
+                String label = rs.getString(7);
+                String image = rs.getString(8);
+                int merchantId = rs.getInt(9);
 
+                Event event = new Event();
+                if (label != null) {
+                    String[] result = label.split(",");
+                    ArrayList<String> labels = new ArrayList<>(Arrays.asList(result));
+                    event.setLabel(labels);
+                }
+                event.setEventID(eventId);
+                event.setEventName(eventName);
+                event.setPosition(position);
+                event.setTime(time);
+                event.setDescription(description);
+                event.setFounderId(founderId);
+                event.setPicture(getBitmap(image));
+                event.setShopId(merchantId);
+                event.setMemberId(getMembers(eventId));
+
+                eventList.add(event);
+                if ((size--) == 0)
+                    break;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);
+        } finally {
+            db.closeConnection(stmt, conn);
+        }
+        return eventList;
+    }
     public ArrayList<Event> getEvent(ArrayList<Integer> eventIdList) {
         ArrayList<Event> events = new ArrayList<>();
         for (int eventId : eventIdList) {
@@ -353,57 +450,6 @@ public class getDataImpl {
             comments.add(comment);
         }
         return comments;
-    }
-    /**
-     * @description  获取size大小的EventList
-     * @param size   size的大小
-     * @return java.util.ArrayList<Bean.Event>
-     */
-    public ArrayList<Event> getEventList(int size) {
-        ArrayList<Event> eventList = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        try {
-            conn = db.getConnection();
-            String sql = "select event_id,event_name,position,time,description,founderId,label,picture,merchantId from event";
-            stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                int eventId = rs.getInt(1);
-                String eventName = rs.getString(2);
-                String position = rs.getString(3);
-                Date time = rs.getDate(4);
-                String description = rs.getString(5);
-                int founderId = rs.getInt(6);
-                String label = rs.getString(7);
-                String image = rs.getString(8);
-                int merchantId = rs.getInt(9);
-
-                Event event = new Event();
-                event.setEventID(eventId);
-                event.setEventName(eventName);
-                event.setPosition(position);
-                event.setTime(time);
-                event.setDescription(description);
-                event.setFounderId(founderId);
-                ArrayList<String> labels = new ArrayList<>();
-                labels.add(label);
-                event.setLabel(labels);
-                event.setPicture(getBitmap(image));
-                event.setShopId(merchantId);
-                event.setMemberId(getMembers(eventId));
-
-                eventList.add(event);
-                if ((size--) == 0)
-                    break;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace(System.out);
-        } finally {
-            db.closeConnection(stmt, conn);
-        }
-        return eventList;
     }
     public ArrayList<Merchant> getMerchantList(int size) {
         ArrayList<Merchant> merchantList = new ArrayList<>();

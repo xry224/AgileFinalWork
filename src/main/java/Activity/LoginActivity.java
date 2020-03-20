@@ -1,12 +1,11 @@
 package Activity;
 
-import Bean.FileGetter;
 import DataBase.DataCenter;
 import DataBase.Invariant;
+import ServerLogic.getDataImpl;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.View;
@@ -25,9 +24,9 @@ public class LoginActivity extends Activity {
         Invariant.rootPath = Objects.requireNonNull(this.getExternalFilesDir("")).getAbsolutePath() + "/";
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        getDataImpl.initPicMap(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        FileGetter.login();
         /*Thread databaseconn = new Thread(runnable);
         databaseconn.start();
         try {
@@ -53,12 +52,9 @@ public class LoginActivity extends Activity {
                     toast.show();
                 }
                 else {
-                    Toast toast = Toast.makeText(LoginActivity.this, "获取数据中，请稍候", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
                     User user = LoginRelevantImpl.login(uname, pwd);
                     if (user == null) {
-                        toast = Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }

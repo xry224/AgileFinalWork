@@ -11,11 +11,11 @@ public class DataBase {
         try {
             String driver = "com.mysql.jdbc.Driver";
             Class.forName(driver);
-            String url = "jdbc:mysql://172.19.240.244:3306/agile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false";
-            //String url="jdbc:mysql://127.0.0.1:3306/agile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8";
+            //String url = "jdbc:mysql://172.19.240.244:3306/agile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false";
+            String url="jdbc:mysql://10.0.2.2:3306/agile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false";
             String username = "root";
-            String password = "123456Lsg.";
-            //String password = "19971031";
+            //String password = "123456Lsg.";
+            String password = "19971031";
             conn = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace(System.out);
