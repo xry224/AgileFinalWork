@@ -2,6 +2,7 @@ package ServerLogic;
 
 import Bean.*;
 import Util.FileGetter;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -318,7 +320,7 @@ public class getDataImpl {
             if (rs.next()) {
                 String eventName = rs.getString(1);
                 String position = rs.getString(2);
-                Date time = rs.getDate(3);
+                Date time = rs.getTimestamp(3);
                 String description = rs.getString(4);
                 int founderId = rs.getInt(5);
                 String label = rs.getString(6);
@@ -330,17 +332,19 @@ public class getDataImpl {
                     ArrayList<String> labels = new ArrayList<>(Arrays.asList(result));
                     event.setLabel(labels);
                 }
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formatTime = sdf.format(time);
+                event.setTime(sdf.parse(formatTime));
                 event.setEventID(eventId);
                 event.setEventName(eventName);
                 event.setPosition(position);
-                event.setTime(time);
                 event.setDescription(description);
                 event.setFounderId(founderId);
                 event.setPicture(getBitmap(image));
                 event.setShopId(merchantId);
                 event.setMemberId(getMembers(eventId));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace(System.out);;
         } finally {
@@ -366,7 +370,7 @@ public class getDataImpl {
                 int eventId = rs.getInt(1);
                 String eventName = rs.getString(2);
                 String position = rs.getString(3);
-                Date time = rs.getDate(4);
+                Date time = rs.getTimestamp(4);
                 String description = rs.getString(5);
                 int founderId = rs.getInt(6);
                 String label = rs.getString(7);
@@ -379,10 +383,12 @@ public class getDataImpl {
                     ArrayList<String> labels = new ArrayList<>(Arrays.asList(result));
                     event.setLabel(labels);
                 }
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formatTime = sdf.format(time);
+                event.setTime(sdf.parse(formatTime));
                 event.setEventID(eventId);
                 event.setEventName(eventName);
                 event.setPosition(position);
-                event.setTime(time);
                 event.setDescription(description);
                 event.setFounderId(founderId);
                 event.setPicture(getBitmap(image));
@@ -393,7 +399,7 @@ public class getDataImpl {
                 if ((size--) == 0)
                     break;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace(System.out);
         } finally {

@@ -1,10 +1,6 @@
 package ServerLogic;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.*;
 import java.util.ArrayList;
 import Bean.Event;
 import Bean.Message;
@@ -234,13 +230,13 @@ public class EventRelevantImpl {
 
         return insertUserEvent && messageRemovedOrNot;
     }
-    public static int getEventCount() {
+    public static int getNextEventID() {
         int size = 0;
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
             conn = db.getConnection();
-            String sql = "select count(*) from Event";
+            String sql = "select max(event_id) from Event";
             stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){
@@ -252,7 +248,7 @@ public class EventRelevantImpl {
         } finally {
             db.closeConnection(stmt, conn);
         }
-        return size;
+        return size + 1;
     }
 
     /**
@@ -263,8 +259,31 @@ public class EventRelevantImpl {
      */
     public static boolean releaseEvent(User creator, Event event) {
         boolean userSucc = false;
+        event.setFounderId(creator.getId());
         Connection conn = null;
         PreparedStatement stmt = null;
+        boolean eventSucc = false;
+        try {
+            conn = db.getConnection();
+            String sql = "insert into event(event_name,position,time,description,founderId,label,event_id) values (?,?,?,?,?,?,?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, event.getEventName());
+            stmt.setString(2, event.getPosition());
+            stmt.setTimestamp(3, new Timestamp(event.getTime().getTime()));
+            stmt.setString(4, event.getDescription());
+            stmt.setInt(5, creator.getId());
+            stmt.setString(6, event.getLabelString());
+            stmt.setInt(7, event.getEventID());
+            int row = stmt.executeUpdate();
+            if (row > 0)
+                eventSucc = true;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);;
+        } finally {
+            db.closeConnection(stmt, conn);
+        }
+        stmt = null;
         try {
             conn = db.getConnection();
             String sql = "insert into user_and_event(userId,eventId) values(?,?)";
@@ -274,30 +293,6 @@ public class EventRelevantImpl {
             int row = stmt.executeUpdate();
             if (row > 0)
                 userSucc = true;
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
-        } finally {
-            db.closeConnection(stmt, conn);
-        }
-        boolean eventSucc = false;
-        event.setFounderId(creator.getId());
-        stmt = null;
-        try {
-            conn = db.getConnection();
-            String sql = "insert into event(event_name,position,time,description,founderId,label,merchantId,event_id) values (?,?,?,?,?,?,?)";
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, event.getEventName());
-            stmt.setString(2, event.getPosition());
-            stmt.setTime(3, (Time) event.getTime());
-            stmt.setString(4, event.getDescription());
-            stmt.setInt(5, creator.getId());
-            stmt.setString(6, event.getLabel().toString());
-            stmt.setInt(7, event.getShopId());
-            stmt.setInt(8, event.getEventID());
-            int row = stmt.executeUpdate();
-            if (row > 0)
-                eventSucc = true;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace(System.out);;

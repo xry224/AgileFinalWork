@@ -130,6 +130,17 @@ public class Event implements Serializable {
         return memberId;
     }
 
+    public String getLabelString(){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < label.size(); ++i){
+            result.append(label.get(i));
+            if (i != label.size() -1){
+                result.append(',');
+            }
+        }
+        return result.toString();
+    }
+
     public void setMemberId(ArrayList<Integer> memberId) {
         this.memberId = memberId;
     }

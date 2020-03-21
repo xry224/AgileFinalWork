@@ -3,10 +3,14 @@ package Activity;
 import Bean.Event;
 import DataBase.DataCenter;
 import ServerLogic.EventRelevantImpl;
+import ServerLogic.getDataImpl;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 import com.example.agile.R;
@@ -20,7 +24,7 @@ import java.util.Date;
 public class newEventActivity extends Activity {
     private String month;
     private String day;
-    private ArrayList<String> labels;
+    private ArrayList<String> labels = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -32,6 +36,21 @@ public class newEventActivity extends Activity {
     private String getSysYear() {
         Calendar date = Calendar.getInstance();
         return String.valueOf(date.get(Calendar.YEAR));
+    }
+
+    private void showLables(){
+        ArrayList<TextView> textViewList = new ArrayList<>();
+        TextView label1 = findViewById(R.id.newEventLabel1);
+        TextView label2 = findViewById(R.id.newEventLabel2);
+        TextView label3 = findViewById(R.id.newEventLabel3);
+        textViewList.add(label1);
+        textViewList.add(label2);
+        textViewList.add(label3);
+        int length = Math.min(textViewList.size(), labels.size());
+        for (int i = 0; i < length; ++i){
+            String content = labels.get(i);
+            textViewList.get(i).setText(content);
+        }
     }
 
     private void init() {
@@ -69,9 +88,11 @@ public class newEventActivity extends Activity {
             public void onClick(View v) {
                 EditText editText = findViewById(R.id.newEventLabel);
                 labels.add(editText.getText().toString());
+                editText.setText("");
                 if (labels.size()>=3){
                     addLabel.setClickable(false);
                 }
+                showLables();
             }
         });
         //获取活动的其他信息
@@ -81,13 +102,14 @@ public class newEventActivity extends Activity {
             public void onClick(View v) {
                 EditText title = findViewById(R.id.newEventTitle);
                 EditText position = findViewById(R.id.newEventLocation);
-                EditText time = findViewById(R.id.newEventTime);
+                EditText Hour = findViewById(R.id.newEventHour);
+                EditText minute = findViewById(R.id.newEventMinute);
                 EditText credit = findViewById(R.id.creditLimit);
                 EditText description = findViewById(R.id.newEventDes);
 
                 Event event = new Event();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:MM");
-                String dates = getSysYear() + "-" + month + "-" + day + " "+ time.getText().toString();
+                String dates = getSysYear() + "-" + month + "-" + day + " "+ Hour.getText().toString() + ":" + minute.getText().toString();
                 Date date = new Date();
                 try {
                     date = format.parse(dates);
@@ -100,8 +122,21 @@ public class newEventActivity extends Activity {
                 event.setFounderId(DataCenter.loginUser.getId());
                 event.setLabel(labels);
                 event.setPosition(position.getText().toString());
-                event.setEventID(EventRelevantImpl.getEventCount() + 1);
+                event.setEventID(EventRelevantImpl.getNextEventID());
                 EventRelevantImpl.releaseEvent(DataCenter.loginUser, event);
+                labels.clear();
+                DataCenter.currentMainEventList = new getDataImpl().getEventList(DataCenter.expectedEventListSize);
+                Toast toast = Toast.makeText(newEventActivity.this, "发布成功！", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                final Intent intent = new Intent(newEventActivity.this, MainActivity.class);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                },1000);
             }
         });
     }

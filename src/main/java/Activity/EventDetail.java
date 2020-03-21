@@ -51,7 +51,7 @@ public class EventDetail extends Activity {
         //设置event各项属性
         title.setText(event.getEventName());
         Date date = event.getTime();
-        @SuppressLint("SimpleDateFormat") Format format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        @SuppressLint("SimpleDateFormat") Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String result = format.format(date);
         time.setText(result);
         position.setText("地点: " + event.getPosition());
