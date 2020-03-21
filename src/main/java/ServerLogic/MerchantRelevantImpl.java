@@ -48,6 +48,25 @@ public class MerchantRelevantImpl {
         return merchantList;
     }
 
+    public static void updateComment(Comment comment){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = db.getConnection();
+            String sql = "update comment set rank=?, content=? where comment_id=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setDouble(1, comment.getRank());
+            stmt.setString(2, comment.getContent());
+            stmt.setInt(3, comment.getCommentId());
+            stmt.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);;
+        } finally {
+            db.closeConnection(stmt, conn);
+        }
+    }
+
     /**
      * @param comment  评论
      * @param merchant 被评价的商家
@@ -63,11 +82,11 @@ public class MerchantRelevantImpl {
         PreparedStatement stmt = null;
         try {
             conn = db.getConnection();
-            String sql = "insert into comment(criticId,content,`rank`,positive,negative,merchantId) values(?,?,?,?,?) ";
+            String sql = "insert into comment(criticId,content,rank,positive,negative,merchantId) values(?,?,?,?,?,?) ";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, comment.getCriticId());
             stmt.setString(2, comment.getContent());
-            stmt.setInt(3, (int) comment.getRank());
+            stmt.setDouble(3, comment.getRank());
             stmt.setInt(4, comment.getPositive());
             stmt.setInt(5, comment.getNegative());
             stmt.setInt(6, merchant.getShopId());

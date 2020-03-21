@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class DataCenter {
     public static Event selectedEvent = null;
     public static Merchant selectedMerchant = null;
+    public static int selectedMerchantPosition = 0;
     public static User loginUser = null;
     private static int expectedEventListSize = 10;
     private static int expectedMerchantListSize = 5;

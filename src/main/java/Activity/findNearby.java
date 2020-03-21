@@ -17,6 +17,22 @@ import java.util.HashMap;
 import Bean.Merchant;
 
 public class findNearby extends Activity {
+    private boolean isPause;
+    private ArrayList<Merchant> merchantList = new ArrayList<>();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isPause){ //判断是否暂停
+            isPause = false;
+            initMerchantList(merchantList, 6);
+        }
+
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isPause = true; //记录页面已经被暂停
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -24,6 +40,7 @@ public class findNearby extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_near);
         InitListener();
+        merchantList = DataCenter.merchantList;
         initMerchantList(DataCenter.merchantList, 6);
         initListListener();
     }
@@ -33,6 +50,7 @@ public class findNearby extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DataCenter.selectedMerchant = DataCenter.merchantList.get(position);
+                DataCenter.selectedMerchantPosition = position;
                 Intent intent = new Intent(findNearby.this, MerchantDetail.class);
                 startActivity(intent);
             }

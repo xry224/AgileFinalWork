@@ -2,11 +2,13 @@ package Activity;
 
 import Bean.Comment;
 import Bean.Merchant;
+import Bean.User;
 import DataBase.DataCenter;
 import ServerLogic.MerchantRelevantImpl;
 import ServerLogic.getDataImpl;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -65,15 +67,86 @@ public class MerchantDetail extends Activity {
         bus.setText(business.toString());
 
         showComment(comments, comments.size());
-
+        final Comment curComment;
         Button newComment = findViewById(R.id.newComment);
-        newComment.setOnClickListener(new View.OnClickListener() {
+        if ((curComment = hasComment(comments, DataCenter.loginUser))!= null){
+            newComment.setText("编辑评价");
+            newComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditComment(curComment);
+                }
+            });
+        }
+        else{
+            newComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    newCommentDialog();
+                }
+            });
+        }
+    }
+
+    private void EditComment(final Comment comment){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MerchantDetail.this);
+        final AlertDialog alertDialog = builder.create();
+        final View dialogView = View.inflate(MerchantDetail.this, R.layout.new_comment, null);
+        alertDialog.setView(dialogView);
+        alertDialog.show();
+
+        final RatingBar ratingBar = dialogView.findViewById(R.id.criticRank);
+        final EditText content = dialogView.findViewById(R.id.newCommentContent);
+        ratingBar.setRating((float) comment.getRank());
+        content.setText(comment.getContent());
+
+        Button publish = dialogView.findViewById(R.id.publishComment);
+        final Button cancel = dialogView.findViewById(R.id.cancelComment);
+        publish.setText("修改");
+        cancel.setText("取消");
+        publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newCommentDialog();
+                double rank = ratingBar.getRating();
+                String commentContent = content.getText().toString();
+                comment.setRank(rank);
+                comment.setContent(commentContent);
+                MerchantRelevantImpl.updateComment(comment);
+
+                //更新merchant对象中的commentList
+                merchant = new getDataImpl().getMerchant(merchant.getShopId());
+                DataCenter.merchantList.set(DataCenter.selectedMerchantPosition, merchant);
+                DataCenter.selectedMerchant = merchant;
+                Toast toast = Toast.makeText(MerchantDetail.this, "修改成功！", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayList<Integer> commentId = new getDataImpl().getMerchantComments(merchant.getShopId());
+                        ArrayList<Comment> comments = new getDataImpl().getComment(commentId);
+                        showComment(comments, comments.size());
+                        alertDialog.dismiss();
+                    }
+                }, 1500);//1.5秒后执行Runnable中的run方法
             }
         });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
 
+    private Comment hasComment(ArrayList<Comment> comments, User user){
+        for (Comment comment : comments){
+            if (comment.getCriticId() == user.getId()){
+                return comment;
+            }
+        }
+        return null;
     }
 
     private void setShopDesImage(ArrayList<Bitmap> list, ImageView imageView1, ImageView imageView2){
@@ -115,7 +188,10 @@ public class MerchantDetail extends Activity {
                 newComment.setPositive(0);
                 newComment.setRank(rank);
                 MerchantRelevantImpl.evaluateMerchant(newComment, merchant);
-
+                //更新merchant对象中的commentList
+                merchant = new getDataImpl().getMerchant(merchant.getShopId());
+                DataCenter.merchantList.set(DataCenter.selectedMerchantPosition, merchant);
+                DataCenter.selectedMerchant = merchant;
                 Toast toast = Toast.makeText(MerchantDetail.this, "评论成功！", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -123,7 +199,11 @@ public class MerchantDetail extends Activity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        ArrayList<Integer> commentId = new getDataImpl().getMerchantComments(merchant.getShopId());
+                        ArrayList<Comment> comments = new getDataImpl().getComment(commentId);
+                        showComment(comments, comments.size());
                         alertDialog.dismiss();
+                        refresh();
                     }
                 }, 1500);//1.5秒后执行Runnable中的run方法
             }
@@ -134,9 +214,11 @@ public class MerchantDetail extends Activity {
                 alertDialog.dismiss();
             }
         });
-        ArrayList<Integer> commentId = new getDataImpl().getMerchantComments(merchant.getShopId());
-        ArrayList<Comment> comments = new getDataImpl().getComment(commentId);
-        showComment(comments, comments.size());
+    }
+    private void refresh(){
+        finish();
+        Intent intent = new Intent(MerchantDetail.this, MerchantDetail.class);
+        startActivity(intent);
     }
 
     private void showComment(final ArrayList<Comment> commentList, int Size) {
