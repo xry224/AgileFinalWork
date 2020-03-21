@@ -8,6 +8,7 @@ import ServerLogic.EventRelevantImpl;
 import ServerLogic.getDataImpl;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ public class EventDetail extends Activity {
             @Override
             public void onClick(View v) {
                 EventRelevantImpl.applyToJoin(DataCenter.loginUser, event);
+                refresh();
                 Toast toast = Toast.makeText(EventDetail.this, "申请成功！请等待审核", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -96,7 +98,11 @@ public class EventDetail extends Activity {
             apply.setClickable(true);
         }
     }
-
+    private void refresh(){
+        finish();
+        Intent intent = new Intent(EventDetail.this, EventDetail.class);
+        startActivity(intent);
+    }
     private boolean isApplicant(User user, Event event){
         User founder = new getDataImpl().getUser(event.getFounderId());
         ArrayList<Message> messages = new getDataImpl().getMessage(founder.getMessageBox());

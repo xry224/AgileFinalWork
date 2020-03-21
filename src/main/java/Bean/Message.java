@@ -14,12 +14,15 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(int applicantId, int wantJoinId) {
+    public Message(int messageId, int applicantId, int wantJoinId) {
         this.messageId = messageId;
         this.applicantId = applicantId;
         this.wantJoinId = wantJoinId;
     }
-
+    public Message(int applicantId, int wantJoinId) {
+        this.applicantId = applicantId;
+        this.wantJoinId = wantJoinId;
+    }
     public int getMessageId() {
         return messageId;
     }
@@ -43,7 +46,9 @@ public class Message implements Serializable {
     public void setWantJoinId(int wantJoinId) {
         this.wantJoinId = wantJoinId;
     }
-
+    public boolean equal(Message message){
+        return this.messageId == message.getMessageId();
+    }
     @Override
     public String toString() {
         return "Message{" +

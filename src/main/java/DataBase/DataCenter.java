@@ -15,7 +15,7 @@ public class DataCenter {
     public static Merchant selectedMerchant = null;
     public static int selectedMerchantPosition = 0;
     public static User loginUser = null;
-    private static int expectedEventListSize = 10;
+    public static int expectedEventListSize = 10;
     private static int expectedMerchantListSize = 5;
     public static int showEventListSize = 6;
     public static ArrayList<Event> currentMainEventList = new getDataImpl().getEventList(DataCenter.expectedEventListSize);

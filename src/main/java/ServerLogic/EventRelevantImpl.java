@@ -10,6 +10,7 @@ import Bean.Event;
 import Bean.Message;
 import Bean.User;
 import DataBase.DataBase;
+import DataBase.DataCenter;
 
 public class EventRelevantImpl {
 
@@ -133,6 +134,21 @@ public class EventRelevantImpl {
      */
     public static boolean applyToJoin(User applicant, Event applyFor) {
         sendMessage(new getDataImpl().getUser(applyFor.getFounderId()), new Message(applicant.getId(), applyFor.getEventID()));
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = db.getConnection();
+            String sql = "insert into message(`applicant`,`wantJoin`) values (?,?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, applicant.getId());
+            stmt.setInt(2, applyFor.getEventID());
+            stmt.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);;
+        } finally {
+            db.closeConnection(stmt, conn);
+        }
         return true;
     }
     /**
@@ -147,6 +163,7 @@ public class EventRelevantImpl {
         receiver.setMessageBox(messages);
         return true;
     }
+
     /**
      * @param message     消息
      * @param user        消息接收者
@@ -162,19 +179,16 @@ public class EventRelevantImpl {
         boolean insertUserEvent = true;
         if (acceptOrNor) {
             //申请者的历史记录+1
+            //无用代码？？
             User applicant = new getDataImpl().getUser(applicantId);
             ArrayList<Integer> historyEvent = applicant.getHistoryEvent();
             historyEvent.add(wantJoinId);
             applicant.setHistoryEvent(historyEvent);
             //Event的成员+1
-            Event wantJoin = new getDataImpl().getEvent(wantJoinId);
-            ArrayList<Integer> members = wantJoin.getMemberId();
-            members.add(applicantId);
-            wantJoin.setMemberId(members);
-
             Connection conn = null;
             PreparedStatement stmt = null;
             try {
+                //添加Event与User的关系
                 conn = db.getConnection();
                 String sql = "insert into user_and_event(userId,eventId) values(?,?)";
                 stmt = conn.prepareStatement(sql);
@@ -189,20 +203,35 @@ public class EventRelevantImpl {
             } finally {
                 db.closeConnection(stmt, conn);
             }
+            DataCenter.currentMainEventList = new getDataImpl().getEventList(DataCenter.expectedEventListSize);
         }
         //移出消息
         boolean messageRemovedOrNot = false;
         ArrayList<Integer> messages = user.getMessageBox();
         for (int i = 0; i < messages.size(); i++) {
             if (messages.get(i) == message.getMessageId()) {
-                messages.remove(i);
+                user.getMessageBox().remove(i);
                 messageRemovedOrNot = true;
                 break;
             }
-            if (i == messages.size() - 1)
-                messageRemovedOrNot = false;
         }
-        user.setMessageBox(messages);
+        //移除消息
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = db.getConnection();
+            String sql = "delete from message where applicant=? and wantJoin=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, applicantId);
+            stmt.setInt(2, wantJoinId);
+            stmt.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);;
+        } finally {
+            db.closeConnection(stmt, conn);
+        }
+
         return insertUserEvent && messageRemovedOrNot;
     }
     public static int getEventCount() {

@@ -26,7 +26,6 @@ public class findNearby extends Activity {
             isPause = false;
             initMerchantList(merchantList, 6);
         }
-
     }
     @Override
     protected void onPause() {

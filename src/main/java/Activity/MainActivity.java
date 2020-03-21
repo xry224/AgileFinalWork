@@ -19,7 +19,22 @@ import java.util.*;
 
 public class MainActivity extends Activity {
     private ArrayList<Event> shownList = null;
+    private boolean isPause;
     private String[] filter = new String[]{"足球","篮球","国际象棋","健身","扑克","跑步","三国杀","游泳","气排球","乒乓球","网球"};
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isPause){ //判断是否暂停
+            isPause = false;
+            shownList = DataCenter.currentMainEventList;
+            showEventCardByListView(shownList, DataCenter.showEventListSize);
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isPause = true; //记录页面已经被暂停
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();

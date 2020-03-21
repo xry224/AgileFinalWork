@@ -1,4 +1,5 @@
 package myView;
+import Activity.MessageActivity;
 import Bean.Message;
 import DataBase.DataCenter;
 import ServerLogic.EventRelevantImpl;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 import com.example.agile.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MessageAdapter extends SimpleAdapter {
     private LayoutInflater mInflater;
     private Context context;
+    private ArrayList<HashMap<String, Object>> itemList;
     /**
      * Constructor
      *
@@ -34,10 +37,11 @@ public class MessageAdapter extends SimpleAdapter {
      * @param to       The views that should display column in the "from" parameter. These should all be
      *                 TextViews. The first N views in this list are given the values of the first N columns
      */
-    public MessageAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
+    public MessageAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, ArrayList<HashMap<String, Object>> itemList) {
         super(context, data, resource, from, to);
         mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.itemList = itemList;
     }
 
     @Override
@@ -48,13 +52,15 @@ public class MessageAdapter extends SimpleAdapter {
         }
         Button accept = convertView.findViewById(R.id.accept);
         Button reject = convertView.findViewById(R.id.reject);
-        final ArrayList<Message> messages = new getDataImpl().getMessage(DataCenter.loginUser.getMessageBox());
+        final ArrayList<Message> messageList = new getDataImpl().getMessage(DataCenter.loginUser.getMessageBox());
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Message message = messages.get(index);
+                Message message = messageList.get(index);
                 EventRelevantImpl.handleMessage(message, DataCenter.loginUser, true);
-                Toast toast = Toast.makeText(context, index + " accept!", Toast.LENGTH_SHORT);
+                MessageActivity.addItem(new getDataImpl().getMessage(DataCenter.loginUser.getMessageBox()), itemList);
+                notifyDataSetChanged();
+                Toast toast = Toast.makeText(context, "已同意申请", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
@@ -62,9 +68,11 @@ public class MessageAdapter extends SimpleAdapter {
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Message message = messages.get(index);
+                Message message = messageList.get(index);
                 EventRelevantImpl.handleMessage(message, DataCenter.loginUser, false);
-                Toast toast = Toast.makeText(context, index + " reject!", Toast.LENGTH_SHORT);
+                MessageActivity.addItem(new getDataImpl().getMessage(DataCenter.loginUser.getMessageBox()), itemList);
+                notifyDataSetChanged();
+                Toast toast = Toast.makeText(context, "已拒绝申请", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
