@@ -28,7 +28,7 @@ public class LoginRelevantImpl {
         System.out.println(certificate + " " + password);
         try {
             conn = db.getConnection();
-            String sql = "select id from user where username = ? or email = ? and password = ?";
+            String sql = "select id from user where (username = ? or email = ?) and password = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, certificate);
             stmt.setString(2, certificate);

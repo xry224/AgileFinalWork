@@ -131,6 +131,7 @@ public class newEventActivity extends Activity {
                 toast.show();
                 final Intent intent = new Intent(newEventActivity.this, MainActivity.class);
                 Handler handler = new Handler();
+                //发布一秒后转到主页面
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

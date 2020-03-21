@@ -34,6 +34,24 @@ public class ForgetPW extends Activity {
                 String newPassword = newPW.getText().toString();
                 String fgVerify = verifycode.getText().toString();
                 String confirm = confirmPW.getText().toString();
+                if (emailAddress.equals("")){
+                    Toast toast = Toast.makeText(ForgetPW.this, "请输入邮箱", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
+                if (newPassword.equals("") || confirm.equals("")){
+                    Toast toast = Toast.makeText(ForgetPW.this, "请输入密码", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
+                if (fgVerify.equals("")){
+                    Toast toast = Toast.makeText(ForgetPW.this, "请输入验证码", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
                 if (!LoginRelevantImpl.resetPassword(emailAddress, fgVerify, verifyCode, newPassword, confirm)){
                     Toast toast = Toast.makeText(ForgetPW.this, "验证码或密码错误", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -47,8 +65,10 @@ public class ForgetPW extends Activity {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                             @Override
-                            public void run() { Intent intent = new Intent(ForgetPW.this,LoginActivity.class);
-                            startActivity(intent); }
+                            public void run() {
+                                Intent intent = new Intent(ForgetPW.this,LoginActivity.class);
+                                startActivity(intent);
+                            }
                         }, 1500);//1.5秒后执行Runnable中的run方法
                 }
 

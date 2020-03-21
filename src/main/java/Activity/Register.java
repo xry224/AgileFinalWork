@@ -39,6 +39,24 @@ public class Register extends Activity {
                 String userVerifyCode = verify.getText().toString();
                 String emailAdd = email.getText().toString();
                 String result = LoginRelevantImpl.register(emailAdd, userName,password, userVerifyCode, verifyCode);
+                if (emailAdd.equals("")){
+                    Toast toast = Toast.makeText(Register.this, "请输入邮箱", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
+                if (userName.equals("") || password.equals("")){
+                    Toast toast = Toast.makeText(Register.this, "请输入密码与用户名", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
+                if (userVerifyCode.equals("")){
+                    Toast toast = Toast.makeText(Register.this, "请输入验证码", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
                 //显示结果
                 Toast toast = Toast.makeText(Register.this, result, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -48,7 +66,8 @@ public class Register extends Activity {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
-                        public void run() { Intent intent = new Intent(Register.this,LoginActivity.class);
+                        public void run() {
+                            Intent intent = new Intent(Register.this,LoginActivity.class);
                             startActivity(intent); }
                     }, 1500);//1.5秒后执行Runnable中的run方法
                 }
