@@ -76,17 +76,18 @@ public class EventDetail extends Activity {
 
             }
         });
-        //检查用户是否已经为活动的一员
-        if (isMember(DataCenter.loginUser, event)){
+        //检查用户是否为活动的创建者
+        if (DataCenter.loginUser.getId() == event.getFounderId()){
             apply.setText("已加入");
             apply.setClickable(false);
         }
-        else{
-            apply.setText("立即加入");
-            apply.setClickable(true);
+        //检查用户是否已经为活动的一员
+        else if (isMember(DataCenter.loginUser, event)){
+            apply.setText("已加入");
+            apply.setClickable(false);
         }
         //检查用户是否已经申请了该活动
-        if (isApplicant(DataCenter.loginUser, event)){
+        else if (isApplicant(DataCenter.loginUser, event)){
             apply.setText("已申请");
             apply.setClickable(false);
         }

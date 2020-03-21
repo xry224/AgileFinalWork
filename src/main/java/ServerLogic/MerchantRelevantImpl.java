@@ -98,12 +98,12 @@ public class MerchantRelevantImpl {
             if (changeValue > 0) {
                 sql = "update comment set positive=? where comment_id=?";
                 stmt = conn.prepareStatement(sql);
-                stmt.setInt(1, comment.getPositive() + changeValue);
+                stmt.setInt(1, comment.getPositive());
                 stmt.setInt(2, comment.getCommentId());
             } else {
                 sql = "update comment set negative=? where comment_id=?";
                 stmt = conn.prepareStatement(sql);
-                stmt.setInt(1, comment.getNegative() - changeValue);
+                stmt.setInt(1, comment.getNegative());
                 stmt.setInt(2, comment.getCommentId());
             }
             row = stmt.executeUpdate();

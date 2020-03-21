@@ -3,6 +3,7 @@ package myView;
 import Activity.MerchantDetail;
 import Bean.Comment;
 import Bean.Merchant;
+import ServerLogic.MerchantRelevantImpl;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -40,17 +41,20 @@ public class CommentAdapter extends SimpleAdapter {
         mInflater = LayoutInflater.from(context);
         //ranks = rank;
     }
+
     public CommentAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, double[] rank, ArrayList<Comment> comments) {
         super(context, data, resource, from, to);
         mInflater = LayoutInflater.from(context);
         //ranks = rank;
         commentList = comments;
     }
+
     public CommentAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to, ArrayList<Comment> comments) {
         super(context, data, resource, from, to);
         mInflater = LayoutInflater.from(context);
         commentList = comments;
     }
+
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
@@ -59,13 +63,32 @@ public class CommentAdapter extends SimpleAdapter {
         }
         final Comment comment = commentList.get(position);
 
-        TextView positiveRank = convertView.findViewById(R.id.positiveRank);
+        final TextView positiveRank = convertView.findViewById(R.id.positiveRank);
         TextView negativeView = convertView.findViewById(R.id.negativeRank);
         positiveRank.setText(Integer.toString(comment.getPositive()));
         negativeView.setText(Integer.toString(comment.getNegative()));
+        ImageButton positive = convertView.findViewById(R.id.positive);
+        ImageButton negative = convertView.findViewById(R.id.negative);
+        positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comment.setPositive(comment.getPositive() + 1);
+                MerchantRelevantImpl.updateComment(comment, 1);
+                positiveRank.setText(Integer.toString(comment.getPositive()));
+            }
+        });
+        negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comment.setPositive(comment.getNegative() + 1);
+                MerchantRelevantImpl.updateComment(comment, -1);
+                positiveRank.setText(Integer.toString(comment.getNegative()));
+            }
+        });
         //set rank of rating bar;
         RatingBar ratingBar = convertView.findViewById(R.id.userRank);
         ratingBar.setRating((float) comment.getRank());
         return super.getView(position, convertView, parent);
     }
 }
+

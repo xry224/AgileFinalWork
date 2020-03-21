@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:descendantFocusability="blocksDescendants"
               android:layout_width="match_parent"
               android:layout_height="100dp">
     <LinearLayout android:layout_width="match_parent"
@@ -43,6 +44,8 @@
         <ImageButton android:layout_width="35dp"
                      android:layout_marginStart="200dp"
                      android:id="@+id/positive"
+                     android:focusable="false"
+                     android:clickable="true"
                      android:background="@color/qmui_config_color_transparent"
                      android:src="@drawable/positive16"
                      android:layout_height="match_parent"/>
@@ -50,10 +53,11 @@
                   android:layout_marginTop="8dp"
                   android:id="@+id/positiveRank"
                   android:textSize="12sp"
-                  android:text="10000"
                   android:layout_height="match_parent"/>
         <ImageButton android:layout_width="35dp"
                      android:id="@+id/negative"
+                     android:focusable="false"
+                     android:clickable="true"
                      android:background="@color/qmui_config_color_transparent"
                      android:src="@drawable/negative16"
                      android:layout_height="match_parent"/>
@@ -61,7 +65,6 @@
                   android:id="@+id/negativeRank"
                   android:textSize="12sp"
                   android:layout_marginTop="8dp"
-                  android:text="10000"
                   android:layout_height="match_parent"/>
     </LinearLayout>
 </LinearLayout>

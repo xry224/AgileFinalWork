@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.*;
 import com.example.agile.R;
 import myView.CommentAdapter;
+import myView.ListViewForScroll;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -117,7 +119,6 @@ public class MerchantDetail extends Activity {
                 Toast toast = Toast.makeText(MerchantDetail.this, "评论成功！", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
-                //延迟后转到登录页面
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -127,18 +128,21 @@ public class MerchantDetail extends Activity {
                 }, 1500);//1.5秒后执行Runnable中的run方法
             }
         });
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
             }
         });
+        ArrayList<Integer> commentId = new getDataImpl().getMerchantComments(merchant.getShopId());
+        ArrayList<Comment> comments = new getDataImpl().getComment(commentId);
+        showComment(comments, comments.size());
     }
+
     private void showComment(final ArrayList<Comment> commentList, int Size) {
         int length = Math.min(Size, commentList.size());
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<>();
-        ListView listView = findViewById(R.id.commentList);
+        ListViewForScroll listView = findViewById(R.id.commentList);
         for (int i = 0; i < length; ++i) {
             Comment comment = commentList.get(i);
             String critic = new getDataImpl().getUser(comment.getCriticId()).getUserName();
@@ -157,31 +161,6 @@ public class MerchantDetail extends Activity {
         int[] value = new int[]{R.id.critic, R.id.commentContent, R.id.positiveRank, R.id.negativeRank};
         CommentAdapter adapter = new CommentAdapter(this,itemList, R.layout.comment_list_item,key, value, commentList);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (view.getId()){
-                    case R.id.positive:
-                    {
-                        Comment comment = commentList.get(position);
-                        comment.setPositive(comment.getPositive() + 1);
-                        showComment(commentList, commentList.size());
-                        break;
-                    }
-                    case R.id.negative:
-                    {
-                        Comment comment = commentList.get(position);
-                        comment.setNegative(comment.getNegative() + 1);
-                        showComment(commentList, commentList.size());
-                        break;
-                    }
-                    default:
-                        {
-                        break;
-                    }
-                }
-            }
-        });
     }
 
 }

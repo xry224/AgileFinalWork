@@ -211,7 +211,7 @@ public class getDataImpl {
         return users;
     }
 
-    private ArrayList<Integer> getMerchantComments(int merchantId) {
+    public ArrayList<Integer> getMerchantComments(int merchantId) {
         ArrayList<Integer> comments = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
