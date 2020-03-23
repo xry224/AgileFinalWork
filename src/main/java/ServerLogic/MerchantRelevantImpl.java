@@ -39,9 +39,10 @@ public class MerchantRelevantImpl {
                 if (size == count)
                     break;
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -61,7 +62,7 @@ public class MerchantRelevantImpl {
             stmt.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -93,7 +94,7 @@ public class MerchantRelevantImpl {
             row = stmt.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -128,7 +129,7 @@ public class MerchantRelevantImpl {
             row = stmt.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }

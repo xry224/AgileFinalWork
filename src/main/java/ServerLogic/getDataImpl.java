@@ -96,9 +96,10 @@ public class getDataImpl {
             while (rs.next()) {
                 eventList.add(rs.getInt(1));
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -118,9 +119,10 @@ public class getDataImpl {
             while (rs.next()) {
                 comments.add(rs.getInt(1));
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -143,9 +145,10 @@ public class getDataImpl {
             }
             //其创建的活动
             historyEvents.addAll(getFounderEvents(user_id));
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -191,9 +194,10 @@ public class getDataImpl {
                 user.setHistoryEvent(getHistoryEvent(id));
                 user.setMessageBox(getMessageForUser(id));
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -226,9 +230,10 @@ public class getDataImpl {
             while (rs.next()) {
                 comments.add(rs.getInt(1));
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -267,9 +272,10 @@ public class getDataImpl {
                 merchant.setRank(rank);
                 merchant.setCommentList(getMerchantComments(shopId));
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -298,9 +304,10 @@ public class getDataImpl {
             while (rs.next()) {
                 members.add(rs.getInt(1));
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -344,9 +351,10 @@ public class getDataImpl {
                 event.setShopId(merchantId);
                 event.setMemberId(getMembers(eventId));
             }
+            rs.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -399,6 +407,7 @@ public class getDataImpl {
                 if ((size--) == 0)
                     break;
             }
+            rs.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace(System.out);
@@ -444,9 +453,10 @@ public class getDataImpl {
                 comment.setNegative(negative);
                 comment.setMerchantId(merchant_id);
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -497,9 +507,10 @@ public class getDataImpl {
                 if ((size--) == 0)
                     break;
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -520,9 +531,10 @@ public class getDataImpl {
                 int messageID = rs.getInt(1);
                 result.add(messageID);
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -548,9 +560,10 @@ public class getDataImpl {
                 message.setApplicantId(applicant);
                 message.setWantJoinId(wantJoin);
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }

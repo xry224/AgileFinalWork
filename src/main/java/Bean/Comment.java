@@ -1,8 +1,6 @@
 package Bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
 /*
     对商店的评论类
  */
@@ -16,9 +14,6 @@ public class Comment implements Serializable {
     private String content;
     //评分
     private double rank;
-    //对评论的回复
-    //暂不考虑对评论的回复
-    private ArrayList<String> reply;
     //点赞数
     private int positive;
     //点踩数
@@ -27,17 +22,6 @@ public class Comment implements Serializable {
     private int merchantId;
 
     public Comment() {
-    }
-
-    public Comment(int commentId, int criticId, String content, double rank, ArrayList<String> reply, int positive, int negative, int merchantId) {
-        this.commentId = commentId;
-        this.criticId = criticId;
-        this.content = content;
-        this.rank = rank;
-        this.reply = reply;
-        this.positive = positive;
-        this.negative = negative;
-        this.merchantId = merchantId;
     }
 
     public int getCommentId() {
@@ -72,14 +56,6 @@ public class Comment implements Serializable {
         this.rank = rank;
     }
 
-    public ArrayList<String> getReply() {
-        return reply;
-    }
-
-    public void setReply(ArrayList<String> reply) {
-        this.reply = reply;
-    }
-
     public int getPositive() {
         return positive;
     }
@@ -111,7 +87,6 @@ public class Comment implements Serializable {
                 ", criticId=" + criticId +
                 ", content='" + content + '\'' +
                 ", rank=" + rank +
-                ", reply=" + reply +
                 ", positive=" + positive +
                 ", negative=" + negative +
                 ", merchantId=" + merchantId +

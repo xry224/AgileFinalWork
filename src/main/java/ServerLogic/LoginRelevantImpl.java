@@ -38,6 +38,7 @@ public class LoginRelevantImpl {
                 int id = rs.getInt(1);
                 user = new getDataImpl().getUser(id);
             }
+            rs.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace(System.out);
@@ -69,9 +70,10 @@ public class LoginRelevantImpl {
             if (rs.next()) {
                 return "用户名已存在！";
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -96,7 +98,7 @@ public class LoginRelevantImpl {
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -173,7 +175,7 @@ public class LoginRelevantImpl {
                 success = true;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }

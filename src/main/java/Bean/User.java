@@ -36,9 +36,6 @@ public class User implements Serializable {
     private ArrayList<Integer> historyEvent;
     //用户信息列表
     private ArrayList<Integer> messageBox;
-    //需要通知的活动
-    //通知功能暂时不考虑
-    //private ArrayList<Event> needNotification;
 
     public User() {
         this.userIcon = null;
@@ -48,22 +45,6 @@ public class User implements Serializable {
         messageBox = new ArrayList<>();
     }
 
-    
-    public User(int id, String userName, String userID, String realName, int rankScore, boolean hasAuthentication, String email, String phoneNumber, Bitmap userIcon, ArrayList<Integer> eventList, ArrayList<Integer> comments, ArrayList<Integer> historyEvent, ArrayList<Integer> messageBox) {
-        this.id = id;
-        this.userName = userName;
-        this.userID = userID;
-        this.realName = realName;
-        this.rankScore = rankScore;
-        this.hasAuthentication = hasAuthentication;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.userIcon = userIcon;
-        this.eventList = eventList;
-        this.comments = comments;
-        this.historyEvent = historyEvent;
-        this.messageBox = messageBox;
-    }
 
     public int getId() {
         return id;

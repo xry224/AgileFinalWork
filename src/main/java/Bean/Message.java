@@ -14,11 +14,6 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(int messageId, int applicantId, int wantJoinId) {
-        this.messageId = messageId;
-        this.applicantId = applicantId;
-        this.wantJoinId = wantJoinId;
-    }
     public Message(int applicantId, int wantJoinId) {
         this.applicantId = applicantId;
         this.wantJoinId = wantJoinId;
@@ -46,8 +41,16 @@ public class Message implements Serializable {
     public void setWantJoinId(int wantJoinId) {
         this.wantJoinId = wantJoinId;
     }
-    public boolean equal(Message message){
-        return this.messageId == message.getMessageId();
+    @Override
+    public boolean equals(Object message){
+        if (message instanceof Message){
+            return this.messageId == ((Message) message).getMessageId();
+        }
+        return false;
+    }
+    @Override
+    public int hashCode() {
+       return super.hashCode();
     }
     @Override
     public String toString() {

@@ -35,9 +35,10 @@ public class EventRelevantImpl {
                 if (count == size)
                     break;
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -61,7 +62,7 @@ public class EventRelevantImpl {
      * @return java.util.ArrayList<Bean.Event>
      * @description 根据活动的标签搜索活动，返回Event对象的的集合
      */
-    public static ArrayList<Event> searchEventByLabel(String condition, int size) {
+    private static ArrayList<Event> searchEventByLabel(String condition, int size) {
         ArrayList<Event> eventList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -80,9 +81,10 @@ public class EventRelevantImpl {
                 if (count == size)
                     break;
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -113,9 +115,10 @@ public class EventRelevantImpl {
                 if (count == size)
                     break;
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -141,7 +144,7 @@ public class EventRelevantImpl {
             stmt.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -195,7 +198,7 @@ public class EventRelevantImpl {
                     insertUserEvent = false;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace(System.out);;
+                e.printStackTrace(System.out);
             } finally {
                 db.closeConnection(stmt, conn);
             }
@@ -223,7 +226,7 @@ public class EventRelevantImpl {
             stmt.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -242,9 +245,10 @@ public class EventRelevantImpl {
             if (rs.next()){
                 size = rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -279,7 +283,7 @@ public class EventRelevantImpl {
                 eventSucc = true;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }
@@ -295,7 +299,7 @@ public class EventRelevantImpl {
                 userSucc = true;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         } finally {
             db.closeConnection(stmt, conn);
         }

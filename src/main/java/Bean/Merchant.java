@@ -36,18 +36,6 @@ public class Merchant implements Serializable {
         imageList = new ArrayList<>();
     }
 
-    public Merchant(int shopId, String shopName, ArrayList<Bitmap> imageList, String position, ArrayList<String> mainBusiness, String description, Bitmap titleImage, double rank, ArrayList<Integer> commentList) {
-        this.shopId = shopId;
-        this.shopName = shopName;
-        this.imageList = imageList;
-        this.position = position;
-        this.mainBusiness = mainBusiness;
-        this.description = description;
-        this.titleImage = titleImage;
-        this.rank = rank;
-        this.commentList = commentList;
-    }
-
     public int getShopId() {
         return shopId;
     }

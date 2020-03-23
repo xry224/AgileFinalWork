@@ -1,5 +1,6 @@
 package myView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -28,6 +29,7 @@ public class WarpLinearLayout extends ViewGroup {
         mType = new Type(context, attrs);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int withMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -56,7 +58,7 @@ public class WarpLinearLayout extends ViewGroup {
                     with += getChildAt(i).getMeasuredWidth();
                 }
                 with += getPaddingLeft() + getPaddingRight();
-                with = with > withSize ? withSize : with;
+                with = Math.min(with, withSize);
                 break;
             case MeasureSpec.UNSPECIFIED:
                 for (int i = 0; i < childCount; i++) {
@@ -79,7 +81,7 @@ public class WarpLinearLayout extends ViewGroup {
         /**
          * 不能够在定义属性时初始化，因为onMeasure方法会多次调用
          */
-        mWarpLineGroup = new ArrayList<WarpLine>();
+        mWarpLineGroup = new ArrayList<>();
         for (int i = 0; i < childCount; i++) {
             if (warpLine.lineWidth + getChildAt(i).getMeasuredWidth() + mType.horizontal_Space > with) {
                 if (warpLine.lineView.size() == 0) {
@@ -116,7 +118,7 @@ public class WarpLinearLayout extends ViewGroup {
                 height = heightSize;
                 break;
             case MeasureSpec.AT_MOST:
-                height = height > heightSize ? heightSize : height;
+                height = Math.min(height, heightSize);
                 break;
             case MeasureSpec.UNSPECIFIED:
                 break;
@@ -175,7 +177,7 @@ public class WarpLinearLayout extends ViewGroup {
             if (lineView.size() != 0) {
                 lineWidth += mType.horizontal_Space;
             }
-            height = height > view.getMeasuredHeight() ? height : view.getMeasuredHeight();
+            height = Math.max(height, view.getMeasuredHeight());
             lineWidth += view.getMeasuredWidth();
             lineView.add(view);
         }

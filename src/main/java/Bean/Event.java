@@ -41,19 +41,6 @@ public class Event implements Serializable {
         memberId = new ArrayList<>();
     }
 
-    public Event(int eventID, String eventName, String position, Date time, String description, int founderId, ArrayList<String> label, Bitmap picture, int shopId, ArrayList<Integer> memberId) {
-        this.eventID = eventID;
-        this.eventName = eventName;
-        this.position = position;
-        this.time = time;
-        this.description = description;
-        this.founderId = founderId;
-        this.label = label;
-        this.picture = picture;
-        this.shopId = shopId;
-        this.memberId = memberId;
-    }
-
     public int getEventID() {
         return eventID;
     }

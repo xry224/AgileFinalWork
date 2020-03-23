@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.agile.R;
 
+import java.util.logging.Logger;
+
 public class ForgetPW extends Activity {
     private String verifyCode = "";
     @Override
